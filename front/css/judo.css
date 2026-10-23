@@ -1,0 +1,45 @@
+/* judo.css */
+.page-title {
+    text-align: center;
+    padding: 60px 0 30px;
+}
+
+.page-title h1 {
+    font-size: 40px;
+}
+
+.judo-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    padding: 40px 0 80px;
+}
+
+.judo-card {
+    background: white;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: 0.3s;
+}
+
+.judo-card img {
+    width: 100%;
+    border-radius: 6px;
+    margin-bottom: 15px;
+}
+
+.judo-card h3 {
+    margin-bottom: 10px;
+    color: #c62828;
+}
+
+.judo-card:hover {
+    transform: translateY(-5px);
+}
+
+@media screen and (max-width: 768px) {
+    .judo-grid {
+        grid-template-columns: 1fr;
+    }
+}

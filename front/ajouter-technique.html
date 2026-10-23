@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajouter une Technique | EJCE</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/licencie.css">
+    <link rel="stylesheet" href="/css/admin.css">
+</head>
+
+<body style="background: #f7f9fc;">
+
+    <header>
+        <div class="container nav">
+            <a href="/"><img src="https://maquette-web-ejce.netlify.app/images.png" class="logo"></a>
+            <div class="hamburger">
+                <span></span><span></span><span></span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href='/'>Accueil</a></li>
+                    <li><a href='/#judo'>Le Judo</a></li>
+                    <li><a href='/newsletter.html'>Newsletter</a></li>
+                    <li><a href='/pedagogique.html'>Équipe pédagogique</a></li>
+                    <li><a href='/contact.html'>Contact</a></li>
+                    <li><a href="/adhesion.html">adhérer au club</a></li>
+                </ul>
+            </nav>
+            <a class='cta' href='/connexion'>ESPACE LICENCIÉ</a>
+        </div>
+    </header>
+
+
+    <main class="container">
+        <div
+            style="max-width: 600px; margin: 40px auto; background: white; padding: 40px; border-radius: 15px; box-shadow: 0 10px 40px rgba(0,0,0,0.05);">
+            <h1 style="color: #c62828; margin-bottom: 30px;">Nouvelle technique</h1>
+
+            <form id="techFormFull">
+                <div id="dropZoneTech" class="drag-zone">
+                    <p>Glissez l'image de la technique ici</p>
+                    <input type="file" id="tFile" hidden accept="image/*">
+                    <img id="previewTech" class="photo-preview" style="border-radius:10px; width:100%; height:auto;">
+                </div>
+
+                <div class="form-group"><label>Nom de la technique</label><input type="text" id="tNom" required
+                        style="width:100%; border-radius:8px; border:1px solid #ddd; padding:10px;"></div>
+                <div class="form-group" style="margin-top:10px;"><label>Description</label><textarea id="tDesc" rows="3"
+                        style="width:100%; border-radius:8px; border:1px solid #ddd; padding:10px;"></textarea></div>
+                <div class="form-group" style="margin-top:10px;"><label>Vidéo (URL Youtube)</label><input type="text"
+                        id="tVideo" style="width:100%; border-radius:8px; border:1px solid #ddd; padding:10px;"></div>
+                <div class="form-group" style="margin-top:10px;"><label>Ceinture</label><select id="tBelt"
+                        style="width:100%; border-radius:8px; border:1px solid #ddd; padding:10px;"></select></div>
+
+                <button type="submit"
+                    style="width:100%; background:#c62828; color:white; border:none; padding:12px; margin-top:30px; border-radius:8px; font-weight:600; cursor:pointer;">Ajouter
+                    la technique</button>
+            </form>
+        </div>
+    </main>
+
+    <script>
+        let uploadedImageUrl = null;
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            const res = await fetch('/api/belts');
+            const belts = await res.json();
+            document.getElementById('tBelt').innerHTML = belts.map(b => `<option value="${b.id}">${b.couleur}</option>`).join('');
+
+            const zone = document.getElementById('dropZoneTech');
+            const fileInput = document.getElementById('tFile');
+            const preview = document.getElementById('previewTech');
+
+            zone.onclick = () => fileInput.click();
+            zone.ondragover = (e) => { e.preventDefault(); zone.classList.add('dragover'); };
+            zone.ondragleave = () => zone.classList.remove('dragover');
+            zone.ondrop = (e) => { e.preventDefault(); zone.classList.remove('dragover'); handleFiles(e.dataTransfer.files); };
+            fileInput.onchange = (e) => handleFiles(e.target.files);
+
+            async function handleFiles(files) {
+                if (!files.length) return;
+                const formData = new FormData();
+                formData.append('file', files[0]);
+                const res = await fetch('/api/upload', { method: 'POST', body: formData });
+                const data = await res.json();
+                if (data.url) {
+                    preview.src = data.url;
+                    preview.style.display = 'block';
+                    uploadedImageUrl = data.url;
+                }
+            }
+        });
+
+        document.getElementById('techFormFull').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const data = {
+                nom: document.getElementById('tNom').value, description: document.getElementById('tDesc').value,
+                video_url: document.getElementById('tVideo').value, belt_id: document.getElementById('tBelt').value,
+                image_url: uploadedImageUrl
+            };
+            const res = await fetch('/api/admin/techniques', {
+                method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data)
+            });
+            if (res.ok) window.location.href = "/revisions";
+        });
+    </script>
+</body>
+
+</html>

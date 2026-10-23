@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modération Newsletter | EJCE</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        .mod-header {
+            background: #2c3e50;
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .mod-grid {
+            display: grid;
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+
+        .mod-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            border-left: 5px solid #ff9800;
+        }
+
+        .mod-meta {
+            font-size: 0.85rem;
+            color: #888;
+            margin-bottom: 10px;
+        }
+
+        .mod-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .mod-content {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #444;
+            margin-bottom: 20px;
+        }
+
+        .mod-images {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            overflow-x: auto;
+            padding-bottom: 10px;
+        }
+
+        .mod-images img {
+            height: 100px;
+            border-radius: 8px;
+            object-fit: cover;
+        }
+
+        .mod-actions {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn-approve {
+            background: #27ae60;
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn-refuse {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn-approve:hover {
+            background: #219150;
+        }
+
+        .btn-refuse:hover {
+            background: #c0392b;
+        }
+    </style>
+</head>
+
+<body style="background: #f4f7f6;">
+    <header>
+        <div class="container nav">
+            <a href="/"><img src="https://maquette-web-ejce.netlify.app/images.png" class="logo"></a>
+            <div class="hamburger">
+                <span></span><span></span><span></span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href='/'>Accueil</a></li>
+                    <li><a href='/#judo'>Le Judo</a></li>
+                    <li><a href='/newsletter.html'>Newsletter</a></li>
+                    <li><a href='/pedagogique.html'>Équipe pédagogique</a></li>
+                    <li><a href='/contact.html'>Contact</a></li>
+                    <li><a href="/adhesion.html">adhérer au club</a></li>
+                </ul>
+            </nav>
+            <a class='cta' href='/connexion'>ESPACE LICENCIÉ</a>
+        </div>
+    </header>
+
+    <section class="mod-header">
+        <div class="container">
+            <h1>Espace Modération</h1>
+            <p>Validez les articles proposés par les adhérents</p>
+        </div>
+    </section>
+
+    <main class="container">
+        <!-- ZONE DE MODÉRATION -->
+        <h2 style="margin-bottom:20px;">Articles en attente de validation</h2>
+        <div id="pendingList" class="mod-grid">
+            <p>Chargement des articles en attente...</p>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const res = await fetch('/api/user');
+            if (!res.ok) { window.location.href = '/connexion'; return; }
+            const user = await res.json();
+            if (user.role_id != 3) { // Admin/Prof
+                alert("Accès réservé aux enseignants.");
+                window.location.href = '/newsletter.html';
+                return;
+            }
+            loadPending();
+        });
+
+        async function loadPending() {
+            const list = document.getElementById('pendingList');
+            try {
+                const res = await fetch('/api/admin/newsletter');
+                const articles = await res.json();
+                if (!Array.isArray(articles) || articles.length === 0) {
+                    list.innerHTML = "<p style='color:#888; text-align:center;'>Aucun article en attente de modération.</p>";
+                    return;
+                }
+                list.innerHTML = articles.map(a => `
+                    <div class="mod-card">
+                        <div class="mod-meta">Proposé par ${a.prenom} ${a.nom} le ${new Date(a.date_creation).toLocaleDateString()}</div>
+                        <div class="mod-title">${a.titre}</div>
+                        <div class="mod-content">${a.contenu.replace(/\n/g, '<br>')}</div>
+                        ${a.images && a.images.length > 0 ? `
+                            <div class="mod-images">
+                                ${a.images.map(img => `<img src="${img}">`).join('')}
+                            </div>
+                        ` : ''}
+                        <div class="mod-actions">
+                            <button class="btn-approve" onclick="moderate(${a.id}, 'approuve')">✅ Approuver</button>
+                            <button class="btn-refuse" onclick="moderate(${a.id}, 'refuse')">❌ Supprimer</button>
+                        </div>
+                    </div>
+                `).join('');
+            } catch (e) {
+                list.innerHTML = "Erreur de chargement.";
+            }
+        }
+
+        async function moderate(id, action) {
+            if (!confirm("Confirmer cette action ?")) return;
+            await fetch('/api/admin/newsletter/moderate', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ id, action })
+            });
+            loadPending();
+        }
+    </script>
+</body>
+
+</html>

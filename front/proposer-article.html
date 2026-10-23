@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Newsletter | EJCE</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        .news-header {
+            background: #c62828;
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .news-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .news-header p {
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
+
+        .newsletter-grid {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 60px;
+            margin-bottom: 100px;
+            padding: 0 20px;
+        }
+
+        .article-card {
+            background: white;
+            border-radius: 25px;
+            box-shadow: 0 15px 45px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease;
+            border: 1px solid #eee;
+            width: 100%;
+            max-width: 900px;
+            /* Centré et large */
+        }
+
+        .article-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+        }
+
+        .article-img-carousel {
+            position: relative;
+            width: 100%;
+            height: 450px;
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scrollbar-width: none;
+            background: #f8f8f8;
+        }
+
+        .article-img-carousel::-webkit-scrollbar {
+            display: none;
+        }
+
+        .article-img-carousel img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            flex-shrink: 0;
+            scroll-snap-align: start;
+        }
+
+        .carousel-hint {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.6);
+            color: white;
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            pointer-events: none;
+            backdrop-filter: blur(5px);
+        }
+
+        .article-body {
+            padding: 40px;
+        }
+
+        .article-meta {
+            color: #c62828;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 15px;
+        }
+
+        .article-title {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #222;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .article-content {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #444;
+            margin-bottom: 30px;
+        }
+
+        .article-footer {
+            padding-top: 25px;
+            border-top: 1px solid #f0f0f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .author {
+            font-weight: 600;
+            color: #666;
+            font-size: 1rem;
+        }
+
+        .like-btn {
+            background: #fff0f0;
+            border: 2px solid #ffcdd2;
+            padding: 10px 22px;
+            border-radius: 35px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+            color: #c62828;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            font-size: 1rem;
+        }
+
+        .like-btn:hover {
+            background: #c62828;
+            color: white;
+            border-color: #c62828;
+            transform: scale(1.1);
+        }
+
+        .like-btn.liked {
+            background: #c62828;
+            color: white;
+            border-color: #c62828;
+            cursor: default;
+        }
+
+        @media (max-width: 768px) {
+            .article-img-carousel {
+                height: 300px;
+            }
+
+            .article-title {
+                font-size: 1.5rem;
+            }
+
+            .article-body {
+                padding: 25px;
+            }
+        }
+
+        /* SUBMISSION FORM */
+        .submission-section {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            margin-top: 80px;
+            margin-bottom: 50px;
+            border: 1px solid #eee;
+            width: 100%;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .submission-section h2 {
+            margin-bottom: 20px;
+            color: #333;
+            text-align: center;
+        }
+
+        .drop-zone {
+            border: 2px dashed #ddd;
+            padding: 25px;
+            text-align: center;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: 0.3s;
+            background: #fafafa;
+        }
+
+        .drop-zone:hover {
+            border-color: #c62828;
+            background: #fff8f8;
+        }
+
+        .img-previews {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+
+        .img-previews img {
+            width: 70px;
+            height: 70px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 2px solid white;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+
+<body style="background: #fafafa;">
+    <header>
+        <div class="container nav">
+            <a href="/"><img src="https://maquette-web-ejce.netlify.app/images.png" class="logo"></a>
+            <div class="hamburger">
+                <span></span><span></span><span></span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href='/'>Accueil</a></li>
+                    <li><a href='/#judo'>Le Judo</a></li>
+                    <li><a href='/newsletter.html'>Newsletter</a></li>
+                    <li><a href='/pedagogique.html'>Équipe pédagogique</a></li>
+                    <li><a href='/contact.html'>Contact</a></li>
+                    <li><a href="/adhesion.html">adhérer au club</a></li>
+                </ul>
+            </nav>
+            <a class='cta' href='/connexion'>ESPACE LICENCIÉ</a>
+        </div>
+    </header>
+
+    <section class="news-header">
+        <div class="container">
+            <h1>Proposer un article</h1>
+            <p>Partagez les moments forts du club avec nous</p>
+        </div>
+    </section>
+
+    <main class="container">
+        <!-- ZONE DE PROPOSITION (Visible seulement si connecté) -->
+        <div id="submissionZone" class="submission-section" style="display:none;">
+            <h2>📣 Proposer un article</h2>
+            <p style="text-align:center; color:#666; margin-bottom:30px;">Partagez un moment fort du club ! Votre
+                article sera validé par un professeur avant publication.</p>
+            <form id="submissionForm">
+                <div class="form-group">
+                    <label>Titre de l'événement</label>
+                    <input type="text" id="subTitre" required placeholder="Ex: Tournoi de Saint-André">
+                </div>
+                <div class="form-group">
+                    <label>Racontez-nous</label>
+                    <textarea id="subContenu" required placeholder="Description de l'événement..."
+                        style="min-height:150px; width:100%; padding:15px; border-radius:10px; border:1px solid #ddd; font-family:inherit;"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Photos (5 maximum)</label>
+                    <div class="drop-zone" id="dropZoneSub">
+                        <p>Cliquez ou glissez vos photos ici</p>
+                        <input type="file" id="subImgInput" hidden accept="image/*" multiple>
+                    </div>
+                    <div class="img-previews" id="subImgPreviews"></div>
+                </div>
+                <button type="submit" class="btn"
+                    style="width:100%; padding:18px; background:#2c3e50; font-size:1.1rem;">Envoyer pour
+                    validation</button>
+            </form>
+        </div>
+
+        <div id="loginPrompt"
+            style="text-align:center; padding:40px; background:#f0f0f0; border-radius:15px; margin-top:50px; display:none;">
+            <p style="color:#666; margin-bottom:15px;">Vous devez être connecté pour proposer un article.</p>
+            <a href="/connexion" class="btn" style="background:#c62828;">Se connecter</a>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            checkUser();
+        });
+
+        async function checkUser() {
+            try {
+                const res = await fetch('/api/user');
+                if (res.ok) {
+                    document.getElementById('submissionZone').style.display = 'block';
+                } else {
+                    document.getElementById('loginPrompt').style.display = 'block';
+                }
+            } catch (e) { }
+        }
+
+        // --- SUBMISSION LOGIC ---
+        let uploadedImages = [];
+        const dropZone = document.getElementById('dropZoneSub');
+        const imgInput = document.getElementById('subImgInput');
+
+        if (dropZone) {
+            dropZone.onclick = () => imgInput.click();
+            imgInput.onchange = (e) => handleFiles(e.target.files);
+        }
+
+        async function handleFiles(files) {
+            for (const file of files) {
+                if (uploadedImages.length >= 5) break;
+                const formData = new FormData();
+                formData.append('file', file);
+                try {
+                    const res = await fetch('/api/upload', { method: 'POST', body: formData });
+                    const data = await res.json();
+                    if (data.url) {
+                        uploadedImages.push(data.url);
+                        document.getElementById('subImgPreviews').innerHTML = uploadedImages.map(u => `<img src="${u}">`).join('');
+                    }
+                } catch (e) { }
+            }
+        }
+
+        document.getElementById('submissionForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const payload = {
+                titre: document.getElementById('subTitre').value,
+                contenu: document.getElementById('subContenu').value,
+                images: uploadedImages
+            };
+            const res = await fetch('/api/newsletter', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+            if (res.ok) {
+                alert("Article envoyé ! Un professeur le validera prochainement.");
+                location.reload();
+            }
+        });
+
+        // --- FIN DE SUBMISSION LOGIC ---
+    </script>
+    <script src="/js/script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Espace licencié | EJCE</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/licencie.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        p {
+            text-align: justify;
+        }
+
+        .profile-info p {
+            text-align: left;
+        }
+
+        nav ul li a,
+        .cta {
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        .logo {
+            height: 80px !important;
+            width: auto;
+        }
+
+        footer a {
+            color: #ffffff !important;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        footer a:hover {
+            color: #c62828 !important;
+        }
+    </style>
+</head>
+
+<body style="background-color: #f7f9fc;">
+
+    <header>
+        <div class="container nav">
+            <a href="/"><img src="https://maquette-web-ejce.netlify.app/images.png" class="logo"></a>
+            <div class="hamburger">
+                <span></span><span></span><span></span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href='/'>Accueil</a></li>
+                    <li><a href='/judo'>Le Judo</a></li>
+                    <li><a href='/newsletter'>Newsletter</a></li>
+                    <li><a href='/Nos encadrants'>Équipe pédagogique</a></li>
+                    <li><a href='/contact'>Contact</a></li>
+                    <li><a href="/adhesion">adhérer au club</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+
+    <main class="container">
+        <h1 class="page-title">Espace licencié</h1>
+
+        <!-- PROFILE CARD (FULL WIDTH) -->
+        <section class="profile-section">
+            <div class="profile-img">
+                <img src="https://maquette-web-ejce.netlify.app/dojo1.jpg" alt="Photo de profil" id="profilePic">
+            </div>
+            <div class="profile-info">
+                <h3 id="userName">Chargement...</h3>
+                <p><strong>Date de naissance :</strong> <span id="userDOB">...</span></p>
+                <p><strong>Catégorie :</strong> <span id="userCategory">...</span></p>
+                <p><strong>Numéro licence :</strong> <span id="userLicence">...</span></p>
+                <p><strong>Ceinture :</strong> <span id="userBelt">...</span></p>
+                <a href="https://moncompte.ffjudo.com/" target="_blank" class="fed-link">Accéder à mon espace
+                    fédération</a>
+            </div>
+        </section>
+
+        <!-- DASHBOARD BOTTOM ROW -->
+        <div class="dashboard-grid">
+            <!-- MESSAGERIE -->
+            <section class="chat-container">
+                <div
+                    style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px; flex-wrap:wrap; gap:10px;">
+                    <h3 style="margin:0;">Messagerie</h3>
+                    <select id="studentAdminSelector" onchange="loadMessages()"
+                        style="padding:8px; border-radius:6px; border:1px solid #ddd; font-family:'Poppins', sans-serif;">
+                        <option value="">Chargement...</option>
+                    </select>
+                </div>
+                <div class="chat-box" id="chatBox">
+                    <p style="text-align:center; color:#999; margin-top:20px;">Sélectionnez un enseignant pour afficher
+                        les messages.</p>
+                </div>
+                <div class="chat-inputbox">
+                    <div class="chat-input">
+                        <input type="text" id="messageInput" placeholder="Écrire un message...">
+                        <button onclick="sendMessage()">Envoyer</button>
+                    </div>
+                </div>
+            </section>
+
+            <section class="actions-container">
+                <a href="javascript:void(0)" onclick="openSettingsModal()" class="action-btn">Paramètres du compte</a>
+                <a href="/proposer-article" class="action-btn">Ajouter un message dans la newsletter</a>
+                <a href="/revisions" class="action-btn">Réviser des techniques</a>
+                <a href="/calendrier" class="action-btn">Calendrier interne</a>
+            </section>
+        </div>
+
+        <!-- LOGOUT BUTTON (CENTERED) -->
+        <div style="text-align:center; padding: 60px 0 20px;">
+            <a href="/connexion"
+                style="background:#c62828; color:white; padding:15px 40px; border-radius:30px; text-decoration:none; font-weight:600; box-shadow: 0 4px 15px rgba(198,40,40,0.3);">Se
+                déconnecter</a>
+        </div>
+
+        <!-- MODAL PARAMETRES -->
+        <div class="modal" id="settingsModal">
+            <div class="modal-content">
+                <h3>Paramètres du compte</h3>
+                <form id="settingsForm">
+                    <div id="dropZoneSettings" class="drag-zone"
+                        style="border: 2px dashed #ccc; padding: 20px; text-align: center; border-radius: 10px; cursor: pointer; margin-bottom: 20px;">
+                        <p>Changer la photo de profil</p>
+                        <input type="file" id="settingsFile" hidden accept="image/*">
+                        <img id="previewSettings" class="photo-preview"
+                            style="display:none; width:80px; height:80px; border-radius:50%; margin:10px auto; object-fit:cover;">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" id="settingsEmail" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Téléphone</label>
+                        <input type="tel" id="settingsPhone">
+                    </div>
+
+                    <div id="adminSettingsFields" style="display:none;">
+                        <div class="form-group"><label>Prénom</label><input type="text" id="settingsPrenom"></div>
+                        <div class="form-group"><label>Nom</label><input type="text" id="settingsNom"></div>
+                        <div class="form-group"><label>Adresse Postale</label><input type="text" id="settingsAddress">
+                        </div>
+                    </div>
+
+                    <hr style="margin: 20px 0; border: 0; border-top: 1px solid #eee;">
+                    <p style="font-weight: 600; margin-bottom: 10px;">Changer le mot de passe (optionnel)</p>
+                    <div class="form-group">
+                        <label>Ancien mot de passe</label>
+                        <input type="password" id="oldPass" placeholder="Requis pour changer le mot de passe">
+                    </div>
+                    <div class="form-group">
+                        <label>Nouveau mot de passe</label>
+                        <input type="password" id="newPass" placeholder="Laissez vide pour ne pas changer">
+                    </div>
+                    <div class="modal-actions">
+                        <button type="button" class="btn-cancel" onclick="closeSettingsModal()">Annuler</button>
+                        <button type="submit" class="btn-save">Enregistrer</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container footer-grid">
+            <div>
+                <img src="https://maquette-web-ejce.netlify.app/images.png" class="footer-logo">
+                <p>Adresse<br>La cressonière<br>97440 Saint-André</p>
+                <div class="footer-socials">
+                    <a href="https://www.facebook.com/EntenteJudoClubdelEst/" class="fb-btn" target="_blank"
+                        rel="noopener noreferrer">
+                        <i class="fab fa-facebook-f"></i>
+                        <span>Suivez l'EJCE sur facebook</span>
+                    </a>
+                </div>
+            </div>
+            <div>
+                <h4>Horaires des cours</h4>
+                <p>Lundi : 18h00<br>Vendredi : 19h15</p>
+            </div>
+            <div>
+                <h4>Plan du site</h4>
+                <ul>
+                    <li><a href='/'>Accueil</a></li>
+                    <li><a href='/judo'>Le Judo</a></li>
+                    <li><a href='/licencie'>Espace licencié</a></li>
+                    <li><a href="/revisions">Page révision</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Notre Partenaire</h4>
+                <div class="footer-partner">
+                    <p style="font-size: 0.85rem; color: #ccc; margin-bottom: 8px;">Partenaire Officiel</p>
+                    <a href="https://www.ffsr.fr/" target="_blank" rel="noopener noreferrer"
+                        title="Fédération Française du Sport Sur Ordonnance / FFSR">
+                        <img src="/img/FFSR.png" alt="Logo FFSR - Partenaire Officiel" class="partner-logo">
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="container" style="margin-top: 30px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 15px;">
+            <div class="copyright">© 2026 EJCE - Tous droits réservés</div>
+            <div style="display:flex; gap: 20px; flex-wrap: wrap;">
+                <a href="/mentions-legales.html" style="font-size:0.82rem; color: #aaa !important;">Mentions légales</a>
+                <a href="/cgu.html" style="font-size:0.82rem; color: #aaa !important;">CGU</a>
+                <a href="/politique-confidentialite.html" style="font-size:0.82rem; color: #aaa !important;">Politique de confidentialité</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/js/script.js"></script>
+    <script>
+        let currentUserData = null;
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                const response = await fetch('/api/user');
+                if (response.ok) {
+                    currentUserData = await response.json();
+                    const data = currentUserData;
+
+                    // On remplit les infos de base
+                    document.getElementById('userName').innerText = `${data.prenom} ${data.nom}`;
+                    document.getElementById('profilePic').src = data.imageUrl || 'https://maquette-web-ejce.netlify.app/dojo1.jpg';
+
+                    // On réinitialise les infos élève par défaut si pas d'infos profil (cas Admin/Prof)
+                    if (!data.profil) {
+                        const info = data.role_id == 3 ? "Administrateur" : "Non renseigné";
+                        document.getElementById('userLicence').innerText = `N/A (${info})`;
+                        document.getElementById('userDOB').innerText = 'N/A';
+                        document.getElementById('userCategory').innerText = 'N/A';
+                        document.getElementById('userBelt').innerText = 'N/A';
+                        return;
+                    }
+
+                    // On remplit les infos réelles de l'adhérent
+                    document.getElementById('userLicence').innerText = data.profil.numeroLicence || 'N/A';
+                    document.getElementById('userDOB').innerText = data.profil.dateNaissance || 'N/A';
+                    // Affiche la ceinture + la date d'obtention entre parenthèses
+                    const beltLabel = data.profil.beltName + (data.profil.dan ? ` (${data.profil.dan}è Dan)` : '');
+                    const beltDate = data.profil.dateCeinture
+                        ? ` (obtenue le ${new Date(data.profil.dateCeinture).toLocaleDateString('fr-FR')})`
+                        : '';
+                    document.getElementById('userBelt').innerText = beltLabel + beltDate;
+
+                    // Calcul catégorie JS
+                    if (data.profil.dateNaissance) {
+                        const birth = new Date(data.profil.dateNaissance);
+                        const today = new Date();
+                        let age = today.getFullYear() - birth.getFullYear();
+
+                        let cat = "Senior";
+                        if (age < 18) cat = "Junior";
+                        if (age < 16) cat = "Cadet";
+                        if (age < 14) cat = "Minime";
+                        if (age < 12) cat = "Benjamin";
+                        if (age < 10) cat = "Poussin";
+                        if (age < 8) cat = "M-Poussin";
+                        if (age < 6) cat = "Eveil";
+                        document.getElementById('userCategory').innerText = cat;
+                    }
+                } else {
+                    window.location.href = '/connexion';
+                }
+            } catch (e) { console.error(e); }
+        });
+
+        async function initAdmins() {
+            try {
+                const res = await fetch('/api/messages?action=get_admins');
+                const admins = await res.json();
+                const selector = document.getElementById('studentAdminSelector');
+                selector.innerHTML = '<option value="">-- Choisir un enseignant --</option>' +
+                    admins.map(a => `<option value="${a.id}">${a.prenom} ${a.nom}</option>`).join('');
+            } catch (e) { console.error("Erreur admins:", e); }
+        }
+        initAdmins();
+
+        async function loadMessages() {
+            const adminId = document.getElementById('studentAdminSelector').value;
+            const chatBox = document.getElementById("chatBox");
+            if (!adminId) {
+                chatBox.innerHTML = '<p style="text-align:center; color:#999; margin-top:20px;">Sélectionnez un enseignant pour afficher les messages.</p>';
+                return;
+            }
+            try {
+                const res = await fetch('/api/messages?admin_id=' + adminId);
+                const msgs = await res.json();
+                if (!Array.isArray(msgs)) return;
+
+                chatBox.innerHTML = msgs.map(m => {
+                    const isMe = (m.sender_role != 3);
+                    return `
+                        <div class="msg ${isMe ? 'user' : 'bot'}">
+                            <p>${m.content}</p>
+                            <span>${m.sender_role == 3 ? m.sender_name : 'Vous'}</span>
+                        </div>
+                    `;
+                }).join('');
+                chatBox.scrollTop = chatBox.scrollHeight;
+            } catch (e) { console.error("Erreur messages:", e); }
+        }
+
+        setInterval(() => {
+            if (document.getElementById('studentAdminSelector').value) {
+                loadMessages();
+            }
+        }, 5000);
+
+        async function sendMessage() {
+            const input = document.getElementById("messageInput");
+            const adminId = document.getElementById('studentAdminSelector').value;
+            if (input.value.trim() === "" || !adminId) {
+                if (!adminId) alert("Veuillez sélectionner un enseignant.");
+                return;
+            }
+
+            const content = input.value;
+            input.value = "";
+
+            try {
+                await fetch('/api/messages', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ content: content, receiver_id: adminId })
+                });
+                loadMessages();
+            } catch (e) { alert("Erreur d'envoi"); }
+        }
+
+        function openSettingsModal() {
+            if (!currentUserData) return;
+            document.getElementById('settingsEmail').value = currentUserData.email || '';
+            document.getElementById('settingsPhone').value = currentUserData.telephone || '';
+
+            if (currentUserData.role_id == 3 || currentUserData.role === 'admin') {
+                document.getElementById('adminSettingsFields').style.display = 'block';
+                document.getElementById('settingsPrenom').value = currentUserData.prenom || '';
+                document.getElementById('settingsNom').value = currentUserData.nom || '';
+                document.getElementById('settingsAddress').value = currentUserData.adresse_postale || '';
+            }
+
+            const preview = document.getElementById('previewSettings');
+            const photoUrl = currentUserData.imageUrl || currentUserData.profile_picture_url;
+            if (photoUrl) {
+                preview.src = photoUrl;
+                preview.style.display = 'block';
+            }
+            document.getElementById('settingsModal').style.display = 'flex';
+        }
+
+        function closeSettingsModal() { document.getElementById('settingsModal').style.display = 'none'; document.getElementById('settingsForm').reset(); }
+
+        let settingsUploadedUrl = null;
+        const settingsFile = document.getElementById('settingsFile');
+        document.getElementById('dropZoneSettings').onclick = () => settingsFile.click();
+        settingsFile.onchange = async (e) => {
+            if (e.target.files && e.target.files[0]) {
+                const file = e.target.files[0];
+                const reader = new FileReader();
+                reader.onload = (ex) => {
+                    document.getElementById('previewSettings').src = ex.target.result;
+                    document.getElementById('previewSettings').style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+
+                // Upload immédiat comme sur le reste du site
+                const formData = new FormData();
+                formData.append('file', file);
+                try {
+                    const res = await fetch('/api/upload', { method: 'POST', body: formData });
+                    const data = await res.json();
+                    if (data.url) settingsUploadedUrl = data.url;
+                } catch (err) { console.error("Erreur upload:", err); }
+            }
+        };
+
+        document.getElementById('settingsForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const data = {
+                user_id: currentUserData.id,
+                email: document.getElementById('settingsEmail').value,
+                telephone: document.getElementById('settingsPhone').value,
+                imageUrl: settingsUploadedUrl || currentUserData.imageUrl || currentUserData.profile_picture_url
+            };
+
+            if (currentUserData.role_id == 3) {
+                data.prenom = document.getElementById('settingsPrenom').value;
+                data.nom = document.getElementById('settingsNom').value;
+                data.adresse_postale = document.getElementById('settingsAddress').value;
+                data.prof_belt_id = currentUserData.prof_ceinture_id || '';
+                data.prof_belt_date = currentUserData.prof_date_ceinture || '';
+            } else if (currentUserData.profil) {
+                // On renvoie les infos actuelles pour ne pas les écraser par du vide
+                data.dateNaissance = currentUserData.profil.dateNaissance;
+                data.numeroLicence = currentUserData.profil.numeroLicence;
+                data.belt_id = currentUserData.profil.ceinture_id;
+                data.belt_date = currentUserData.profil.dateCeinture;
+                data.dan = currentUserData.profil.dan;
+            }
+
+            if (document.getElementById('newPass').value) {
+                data.old_password = document.getElementById('oldPass').value;
+                data.password = document.getElementById('newPass').value;
+            }
+
+            try {
+                const res = await fetch('/api/user/update', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                if (res.ok) {
+                    alert("Profil mis à jour !");
+                    location.reload();
+                } else {
+                    const data = await res.json(); alert("Erreur : " + (data.error || "Vérifiez vos données"));
+                }
+            } catch (err) { alert("Erreur réseau."); }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mot de passe oublié - EJCE</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/login.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+
+<body style="background-color: #f7f7f7;">
+    <header>
+        <div class="container nav">
+            <a href="/"><img src="https://maquette-web-ejce.netlify.app/images.png" class="logo"
+                    style="height: 70px;"></a>
+        </div>
+    </header>
+
+    <main style="padding: 60px 20px; min-height: 60vh;">
+        <div
+            style="max-width: 450px; margin: 0 auto; background: white; padding: 40px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.08);">
+            <h2 style="font-family: 'Poppins', sans-serif; text-align: center; color: #b22222; margin-bottom: 20px;">
+                Vérification</h2>
+            <p style="text-align: center; color: #555; margin-bottom: 30px;">Un code de vérification a été envoyé à
+                votre adresse email.</p>
+
+            <form id="verifyCodeForm">
+                <div style="margin-bottom: 20px;">
+                    <label
+                        style="display: block; margin-bottom: 8px; font-weight: 600; font-family: 'Poppins', sans-serif;">Code
+                        reçu</label>
+                    <input type="text" id="verifyCode" required placeholder="Ex: 123456"
+                        style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 6px; font-family: 'Poppins', sans-serif;">
+                </div>
+
+                <div style="margin-bottom: 20px;">
+                    <label
+                        style="display: block; margin-bottom: 8px; font-weight: 600; font-family: 'Poppins', sans-serif;">Nouveau
+                        mot de passe</label>
+                    <input type="password" id="verifyNewPassword" required
+                        style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 6px; font-family: 'Poppins', sans-serif;">
+                </div>
+
+                <button type="submit"
+                    style="width: 100%; background: #28a745; color: white; border: none; padding: 15px; border-radius: 6px; font-size: 16px; font-weight: 600; cursor: pointer; transition: 0.3s;">Valider
+                    et modifier</button>
+
+                <div id="verifyMsg" style="margin-top: 15px; text-align: center; font-weight: bold; font-size: 0.9rem;">
+                </div>
+            </form>
+
+            <div style="text-align: center; margin-top: 20px;">
+                <a href="/connexion" style="color: #666; font-size: 0.9rem; text-decoration: underline;">Retour à la
+                    connexion</a>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.getElementById('verifyCodeForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const code = document.getElementById('verifyCode').value;
+            const newPassword = document.getElementById('verifyNewPassword').value;
+            const verifyMsg = document.getElementById('verifyMsg');
+
+            verifyMsg.style.color = "blue";
+            verifyMsg.innerText = "Vérification en cours...";
+
+            try {
+                const response = await fetch('/api/forgot-password-verify', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ code: code, new_password: newPassword })
+                });
+
+                const data = await response.json();
+
+                if (response.ok && data.success) {
+                    verifyMsg.style.color = "green";
+                    verifyMsg.innerText = "Mot de passe modifié avec succès ! Redirection...";
+                    setTimeout(() => {
+                        window.location.href = '/connexion';
+                    }, 2000);
+                } else {
+                    verifyMsg.style.color = "red";
+                    verifyMsg.innerText = data.error || "Code incorrect ou expiré.";
+                }
+            } catch (error) {
+                verifyMsg.style.color = "red";
+                verifyMsg.innerText = "Erreur réseau.";
+            }
+        });
+    </script>
+</body>
+
+</html>

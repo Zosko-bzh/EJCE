@@ -1,0 +1,1065 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: #f5f5f5;
+  color: #222;
+}
+
+h1 {
+  font-family: Alkatra;
+}
+
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: auto;
+}
+
+/* HEADER */
+
+header {
+  background: white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 0;
+}
+
+.logo {
+  height: 50px;
+}
+
+nav ul {
+  display: flex;
+  gap: 25px;
+  list-style: none;
+}
+
+nav a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+nav a:hover {
+  color: #c62828;
+}
+
+.cta {
+  background: #c62828;
+  color: white;
+  padding: 10px 18px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* HERO */
+
+/* Hero avec overlay */
+.hero {
+  position: relative;
+  height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+  overflow: hidden;
+}
+
+/* Overlay dégradé */
+.hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(rgba(105, 105, 105, 0.6), rgba(139, 139, 139, 0.6));
+  z-index: 1;
+}
+
+/* Texte et bouton par-dessus */
+.hero h1,
+.hero p,
+.hero .btn {
+  position: relative;
+  z-index: 2;
+}
+
+/* Slides dynamiques */
+.hero-slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transform: scale(1.1);
+  /* légèrement zoomé au départ */
+  transition: opacity 1.5s ease-in-out, transform 5s ease-out;
+  z-index: 0;
+}
+
+/* slide active */
+.hero-slide.active {
+  opacity: 1;
+  transform: scale(1);
+  /* dézoom progressif à 1 */
+}
+
+.btn {
+  background: #c62828;
+  color: #ffffff;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn:hover {
+  transform: scale(1.05);
+}
+
+/* PRESENTATION */
+
+.presentation {
+  padding: 70px 0;
+  text-align: center;
+}
+
+.presentation h2 {
+  margin-bottom: 20px;
+}
+
+.images {
+  display: flex;
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.card {
+  flex: 1;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.card img {
+  width: 100%;
+  transition: 0.4s;
+}
+
+.card:hover img {
+  transform: scale(1.1);
+}
+
+/* INFOS */
+
+.infos {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  padding: 70px 0;
+}
+
+.mapbox {
+  background: #ddd;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  margin: 15px 0;
+}
+
+.numbers {
+  display: flex;
+  gap: 30px;
+  margin-top: 20px;
+}
+
+.numbers h4 {
+  font-size: 30px;
+  color: #c62828;
+}
+
+/* FOOTER */
+
+footer {
+  background: #111;
+  color: white;
+  padding: 50px 0;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 40px;
+}
+
+.footer-logo {
+  width: 100px;
+  margin-bottom: 10px;
+}
+
+footer ul {
+  list-style: none;
+}
+
+footer li {
+  margin-bottom: 8px;
+}
+
+.copyright {
+  text-align: center;
+  margin-top: 30px;
+  font-size: 14px;
+  opacity: 0.7;
+}
+
+.page-title {
+  text-align: center;
+  padding: 60px 0 30px;
+}
+
+.page-title h1 {
+  font-size: 40px;
+}
+
+.judo-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  padding: 40px 0 80px;
+}
+
+.judo-card {
+  background: white;
+  padding: 25px;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transition: 0.3s;
+}
+
+.judo-card img {
+  width: 100%;
+  border-radius: 6px;
+  margin-bottom: 15px;
+}
+
+.judo-card h3 {
+  margin-bottom: 10px;
+  color: #c62828;
+}
+
+.judo-card:hover {
+  transform: translateY(-5px);
+}
+
+
+
+
+
+
+.profile {
+  padding: 40px 0;
+}
+
+.profile-card {
+  display: flex;
+  gap: 30px;
+  background: white;
+  padding: 25px;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.profile-left img {
+  width: 150px;
+  border-radius: 8px;
+}
+
+.profile-right h3 {
+  margin-bottom: 10px;
+}
+
+.profile-right p {
+  margin-bottom: 8px;
+}
+
+
+/* DASHBOARD */
+
+.dashboard {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  padding: 40px 0;
+}
+
+.teacher-message {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.actions {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.actions button {
+  padding: 12px;
+  border: none;
+  background: #444;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.actions button:hover {
+  background: #c62828;
+}
+
+
+/* LOGOUT */
+
+.logout {
+  text-align: center;
+  padding: 20px 0 60px;
+}
+
+.logout-btn {
+  background: #e74c3c;
+  color: white;
+  padding: 15px 30px;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.logout-btn:hover {
+  transform: scale(1.05);
+}
+
+.teacher-message {
+  display: flex;
+  flex-direction: column;
+  height: 400px;
+}
+
+.chat-box {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 15px;
+  padding-right: 5px;
+}
+
+.message {
+  max-width: 70%;
+  padding: 10px 15px;
+  border-radius: 10px;
+  font-size: 14px;
+}
+
+.message p {
+  margin-bottom: 5px;
+}
+
+.message span {
+  font-size: 11px;
+  opacity: 0.6;
+}
+
+.teacher {
+  background: #eee;
+  align-self: flex-start;
+}
+
+.user {
+  background: #c62828;
+  color: white;
+  align-self: flex-end;
+}
+
+.chat-input {
+  display: flex;
+  gap: 10px;
+}
+
+.chat-input input {
+  flex: 1;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.chat-input button {
+  background: #c62828;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+
+
+.filters {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+
+.filters button {
+  background: #444;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.filters button:hover {
+  background: #c62828;
+}
+
+.techniques {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+}
+
+.card {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.detail {
+  display: none;
+  margin-top: 50px;
+}
+
+.detail-content {
+  display: flex;
+  gap: 40px;
+  background: white;
+  padding: 30px;
+  border-radius: 8px;
+}
+
+.detail-left img {
+  width: 300px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.back {
+  margin-bottom: 20px;
+  background: #c62828;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 6px;
+  margin-bottom: 10px;
+  transition: 0.3s;
+}
+
+.card:hover img {
+  transform: scale(1.05);
+}
+
+.detail-content {
+  display: flex;
+  gap: 40px;
+}
+
+.detail-left {
+  width: 40%;
+}
+
+.detail-right {
+  width: 60%;
+}
+
+.main-img {
+  width: 100%;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+.video-placeholder {
+  margin-top: 15px;
+  height: 200px;
+  border: 2px dashed #999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+}
+
+.video-container {
+  margin-top: 15px;
+  width: 100%;
+  aspect-ratio: 16/9;
+}
+
+.video-container iframe {
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+}
+
+main section {
+  max-width: 550px;
+  /* Taille idéale pour la lecture/saisie */
+  margin: 40px auto;
+  background-color: #fff;
+  padding: 40px;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+#contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+#contact-form input,
+#contact-form textarea {
+  width: 100%;
+  /* Prend toute la largeur interne */
+  box-sizing: border-box;
+  /* Évite que le padding ne fasse déborder l'input */
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+
+
+
+.inscription {
+  padding: 60px 20px;
+  background: #f5f5f5;
+  font-family: 'Poppins', sans-serif;
+  color: #222;
+}
+
+.inscription .container {
+  max-width: 800px;
+  margin: auto;
+  text-align: center;
+}
+
+.inscription h1 {
+  font-size: 36px;
+  margin-bottom: 20px;
+  color: #c62828;
+}
+
+.inscription h2 {
+  font-size: 24px;
+  margin: 30px 0 15px;
+  color: #c62828;
+}
+
+.inscription p {
+  font-size: 16px;
+  margin-bottom: 15px;
+}
+
+.inscription ul {
+  text-align: left;
+  margin: 0 auto 20px;
+  max-width: 500px;
+  list-style: disc;
+  padding-left: 20px;
+  font-size: 16px;
+}
+
+.inscription a.btn,
+.inscription button.btn {
+  display: inline-block;
+  margin-top: 15px;
+  background: #c62828;
+  color: white;
+  padding: 10px 20px;
+  font-weight: 500;
+  border-radius: 5px;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  transition: 0.3s;
+}
+
+.inscription a.btn:hover,
+.inscription button.btn:hover {
+  background: #b71c1c;
+}
+
+.upload-form {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
+}
+
+.upload-form input[type="file"] {
+  padding: 5px;
+  font-size: 14px;
+}
+
+
+
+
+/* adérent
+
+/* Section équipe */
+.team {
+  padding: 60px 20px;
+  background: #f5f5f5;
+  font-family: 'Poppins', sans-serif;
+  color: #222;
+  text-align: center;
+}
+
+.team .container {
+  max-width: 600px;
+  margin: auto;
+}
+
+.team h1 {
+  font-size: 36px;
+  color: #c62828;
+  margin-bottom: 15px;
+}
+
+.team p {
+  font-size: 16px;
+  margin-bottom: 30px;
+}
+
+/* Carte enseignant unique */
+.team-card {
+  background: white;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s;
+}
+
+.team-card:hover {
+  transform: translateY(-5px);
+}
+
+.team-img img {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-bottom: 15px;
+}
+
+.team-card h3 {
+  color: #c62828;
+  margin-bottom: 5px;
+}
+
+.team-card .role {
+  font-weight: 500;
+  margin-bottom: 10px;
+  font-size: 14px;
+  color: #555;
+}
+
+.team-card p {
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* Style spécifique pour le conteneur dans le footer */
+.footer-socials {
+  margin-top: 15px;
+}
+
+.fb-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background-color: #1877F2;
+  color: #ffffff !important;
+  /* Force le blanc si vos liens de footer sont d'une autre couleur */
+  text-decoration: none;
+  border-radius: 8px;
+  /* Carré arrondi moderne */
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.fb-btn:hover {
+  background-color: #145dbf;
+  transform: scale(1.05);
+  /* Effet de zoom léger */
+  box-shadow: 0 4px 12px rgba(24, 119, 242, 0.4);
+}
+
+/* Optionnel : Si vous n'avez pas encore de style pour la grille du footer */
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 30px;
+  padding: 40px 0;
+}
+
+.footer-logo {
+  max-width: 120px;
+  margin-bottom: 15px;
+}
+
+/* ==================================== */
+/* 2. TABLETTES (Moins de 768px)        */
+/* ==================================== */
+@media screen and (max-width: 768px) {
+  main section {
+    max-width: 90%;
+    /* On élargit un peu pour profiter de l'espace */
+    padding: 30px;
+    margin: 20px auto;
+  }
+
+  h2 {
+    font-size: 24px;
+  }
+}
+
+/* ==================================== */
+/* 3. MOBILES (Moins de 480px)          */
+/* ==================================== */
+@media screen and (max-width: 480px) {
+  main section {
+    max-width: 95%;
+    padding: 20px 15px;
+    /* On réduit le padding interne pour gagner de la place */
+    border-radius: 10px;
+    box-shadow: none;
+    /* On retire l'ombre pour un look plus "flat" sur mobile */
+    border: 1px solid #eee;
+  }
+
+  h2 {
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+
+  #contact-form label {
+    font-size: 13px;
+    /* Labels légèrement plus petits */
+  }
+
+  #contact-form button {
+    width: 100%;
+    /* Le bouton prend toute la largeur */
+    padding: 15px;
+    font-size: 16px;
+  }
+}
+
+/* ===== Responsive ===== */
+
+/* Tablettes (768px et moins) */
+@media (max-width: 768px) {
+
+  /* Navigation */
+  .nav {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  nav ul {
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+  }
+
+  .cta {
+    padding: 8px 15px;
+  }
+
+  /* Hero */
+  .hero {
+    height: 400px;
+    padding: 0 20px;
+  }
+
+  .hero h1 {
+    font-size: 32px;
+  }
+
+  .hero p {
+    font-size: 16px;
+  }
+
+  .btn {
+    padding: 10px 20px;
+  }
+
+  /* Presentation images */
+  .images {
+    flex-direction: column;
+  }
+
+  /* Infos */
+  .infos {
+    grid-template-columns: 1fr;
+  }
+
+  .numbers {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  /* Footer */
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  /* Judo grid */
+  .judo-grid {
+    grid-template-columns: 1fr;
+    padding: 20px 0 50px;
+  }
+
+  /* Profile */
+  .profile-card {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .profile-left img {
+    width: 120px;
+  }
+
+  .profile-right {
+    width: 100%;
+  }
+
+  /* Dashboard */
+  .dashboard {
+    grid-template-columns: 1fr;
+  }
+
+  .actions {
+    flex-direction: column;
+  }
+
+  /* Techniques */
+  .techniques {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .detail-content {
+    flex-direction: column;
+  }
+
+  .detail-left,
+  .detail-right {
+    width: 100%;
+  }
+
+  .detail-left img {
+    width: 100%;
+  }
+
+  .video-container {
+    aspect-ratio: 16/9;
+  }
+}
+
+/* Mobiles (480px et moins) */
+@media (max-width: 480px) {
+
+  /* Header / Nav */
+  .nav {
+    position: relative;
+    padding: 10px 0;
+  }
+
+  /* Menu caché par défaut */
+  nav ul {
+    display: none;
+    /* caché par défaut */
+    flex-direction: column;
+    gap: 10px;
+    background: white;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    padding: 15px 0;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    z-index: 99;
+  }
+
+  /* Menu actif */
+  nav ul.active {
+    display: flex;
+  }
+
+  /* Hamburger bouton */
+  .hamburger {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 25px;
+    height: 20px;
+    cursor: pointer;
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 101;
+    /* au-dessus du bouton cta */
+  }
+
+  .hamburger span {
+    display: block;
+    height: 3px;
+    width: 100%;
+    background: #333;
+    border-radius: 2px;
+    transition: 0.3s;
+  }
+
+  /* Logo et CTA réduits */
+  .nav img.logo {
+    height: 40px;
+  }
+
+  .nav .cta {
+    padding: 6px 12px;
+    font-size: 14px;
+  }
+}
+
+/* Hamburger invisible sur desktop */
+.hamburger {
+  display: none;
+}
+
+/* Mobile / tablettes */
+@media (max-width: 768px) {
+
+  .nav {
+    position: relative;
+  }
+
+  /* Hamburger visible */
+  .hamburger {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 25px;
+    height: 20px;
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    z-index: 201;
+  }
+
+  .hamburger span {
+    display: block;
+    height: 3px;
+    width: 100%;
+    background: #333;
+    border-radius: 2px;
+    transition: 0.3s;
+  }
+
+  /* Menu caché par défaut */
+  nav ul {
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+    background: white;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    padding: 15px 0;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    z-index: 200;
+  }
+
+  /* Menu actif */
+  nav ul.active {
+    display: flex;
+  }
+
+  /* Réduire le header */
+  .nav img.logo {
+    height: 40px;
+  }
+
+  .nav .cta {
+    padding: 6px 12px;
+    font-size: 14px;
+  }
+}

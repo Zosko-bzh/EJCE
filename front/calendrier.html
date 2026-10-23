@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendrier des Compétitions | EJCE</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/licencie.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .event-card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            border-left: 5px solid #c62828;
+        }
+
+        .event-date {
+            font-weight: 600;
+            color: #c62828;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+
+        .event-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .event-info {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .event-cat-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        .event-cat {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: white;
+            text-transform: uppercase;
+        }
+
+        /* Couleurs par catégorie */
+        .cat-eveil {
+            background-color: #e91e63;
+        }
+
+        .cat-m-poussin {
+            background-color: #9c27b0;
+        }
+
+        .cat-poussin {
+            background-color: #3f51b5;
+        }
+
+        .cat-benjamin {
+            background-color: #2196f3;
+        }
+
+        .cat-minime {
+            background-color: #009688;
+        }
+
+        .cat-cadet {
+            background-color: #4caf50;
+        }
+
+        .cat-junior {
+            background-color: #ff9800;
+        }
+
+        .cat-senior {
+            background-color: #795548;
+        }
+
+        .cat-default {
+            background-color: #9e9e9e;
+        }
+
+        .admin-controls {
+            margin-top: 20px;
+            display: none;
+        }
+
+        .btn-delete-event {
+            background: none;
+            border: none;
+            color: #c62828;
+            cursor: pointer;
+            float: right;
+            font-size: 1.2rem;
+        }
+
+        .cat-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #eee;
+        }
+
+        .cat-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body style="background: #f7f9fc;">
+    <header>
+        <div class="container nav">
+            <a href="/"><img src="https://maquette-web-ejce.netlify.app/images.png" class="logo"></a>
+            <div class="hamburger">
+                <span></span><span></span><span></span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href='/'>Accueil</a></li>
+                    <li><a href='/#judo'>Le Judo</a></li>
+                    <li><a href='/newsletter.html'>Newsletter</a></li>
+                    <li><a href='/pedagogique.html'>Équipe pédagogique</a></li>
+                    <li><a href='/contact.html'>Contact</a></li>
+                    <li><a href="/adhesion.html">adhérer au club</a></li>
+                </ul>
+            </nav>
+            <a class='cta' href='/connexion'>ESPACE LICENCIÉ</a>
+        </div>
+    </header>
+
+
+    <main class="container">
+        <h1 class="page-title">Calendrier des Compétitions</h1>
+
+        <div id="adminActionZone" style="display:none; text-align:right; margin-bottom: 20px;">
+            <button class="btn-save" onclick="openCompModal()">+ Ajouter une compétition</button>
+        </div>
+
+        <div id="calendarList" class="calendar-grid">Chargement...</div>
+    </main>
+
+    <!-- MODAL ADD COMP -->
+    <div class="modal" id="compModal">
+        <div class="modal-content">
+            <h3>Ajouter une compétition</h3>
+            <form id="compForm">
+                <div class="form-group"><label>Nom de l'événement</label><input type="text" id="compNom"
+                        value="évènement" required></div>
+                <input type="date" id="compDate" hidden>
+                <input type="text" id="compLieu" hidden value="">
+                <div class="form-group">
+                    <label>Catégories concernées</label>
+                    <div class="cat-list" id="catCheckboxes">
+                        <label class="cat-item"><input type="checkbox" value="Eveil"> Eveil</label>
+                        <label class="cat-item"><input type="checkbox" value="M-Poussin"> M-Poussin</label>
+                        <label class="cat-item"><input type="checkbox" value="Poussin"> Poussin</label>
+                        <label class="cat-item"><input type="checkbox" value="Benjamin"> Benjamin</label>
+                        <label class="cat-item"><input type="checkbox" value="Minime"> Minime</label>
+                        <label class="cat-item"><input type="checkbox" value="Cadet"> Cadet</label>
+                        <label class="cat-item"><input type="checkbox" value="Junior"> Junior</label>
+                        <label class="cat-item"><input type="checkbox" value="Senior"> Senior</label>
+                    </div>
+                </div>
+                <div class="form-group"><label>Description</label><textarea id="compDesc"
+                        style="padding:10px; border-radius:6px; border:1px solid #ddd;"></textarea></div>
+                <div class="modal-actions">
+                    <button type="button" class="btn-cancel" onclick="closeCompModal()">Annuler</button>
+                    <button type="submit" class="btn-save">Enregistrer</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        let isAdmin = false;
+        let currentUser = null;
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            await checkRole();
+            loadCompetitions();
+        });
+
+        async function checkRole() {
+            const res = await fetch('/api/user');
+            if (res.ok) {
+                const user = await res.json();
+                currentUser = user;
+                if (user.role_id == 3) {
+                    isAdmin = true;
+                    const actionZone = document.getElementById('adminActionZone');
+                    if (actionZone) actionZone.style.display = 'block';
+                }
+            }
+        }
+
+        async function loadCompetitions() {
+            const list = document.getElementById('calendarList');
+            const res = await fetch('/api/competitions');
+            const data = await res.json();
+
+            if (data.length === 0) {
+                list.innerHTML = "<p>Aucune compétition prévue pour le moment.</p>";
+                return;
+            }
+
+            list.innerHTML = data.map(c => {
+                const categories = c.categorie ? c.categorie.split(',') : [];
+                const badges = categories.map(cat => {
+                    const slug = cat.trim().toLowerCase().replace(' ', '-');
+                    return `<span class="event-cat cat-${slug}">${cat.trim()}</span>`;
+                }).join('');
+
+                const participantsHtml = c.participants && c.participants.length > 0 ? `
+                    <div class="participants-list" style="margin-top: 15px; display: flex; gap: 10px; flex-wrap: wrap;">
+                        ${c.participants.map(p => `
+                            <div class="participant" style="display: flex; align-items: center; gap: 8px; background: #f0f0f0; padding: 5px 10px; border-radius: 20px;">
+                                <img src="${p.imageUrl || 'https://ui-avatars.com/api/?name=' + encodeURIComponent(p.prenom) + '&background=random'}" style="width:30px; height:30px; border-radius:50%; object-fit:cover;">
+                                <div style="font-size: 0.8rem; line-height: 1.2;">
+                                    <strong>${p.prenom || 'Inconnu'}</strong><br>
+                                    <span style="color: #666;">${p.categorie || 'Senior'}</span>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                ` : '<p style="font-size:0.8rem; color:#888; margin-top:15px;">Aucun participant pour le moment.</p>';
+
+                const isRegistered = currentUser && c.participants && c.participants.some(p => Number(p.id) === Number(currentUser.id));
+                const registerBtnHtml = currentUser ? `
+                    <button class="btn-register" onclick="toggleRegistration(${c.id})" style="margin-top: 15px; background: ${isRegistered ? '#e53935' : '#4CAF50'}; color: white; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; font-weight: 600; transition: background 0.3s;">
+                        ${isRegistered ? 'Se désinscrire' : "Je m'inscris"}
+                    </button>
+                    ` : '';
+
+                return `
+                    <div class="event-card">
+                        ${isAdmin ? `<button class="btn-delete-event" onclick="deleteComp(${c.id})">🗑️</button>` : ''}
+                    <div class="event-title">${c.nom}</div>
+                    <p style="font-size:0.9rem; margin-bottom:15px; color:#555;">${c.description || ''}</p>
+                    <div class="event-cat-wrapper">${badges || '<span class="event-cat cat-default">Toutes catégories</span>'}</div>
+                    ${participantsHtml}
+                    ${registerBtnHtml}
+                </div>
+                    `}).join('');
+        }
+
+        function openCompModal() {
+            document.getElementById('compModal').style.display = 'flex';
+            document.getElementById('compDate').value = new Date().toISOString().split('T')[0];
+        }
+        function closeCompModal() {
+            document.getElementById('compModal').style.display = 'none';
+            document.getElementById('compForm').reset();
+            document.getElementById('compNom').value = "évènement";
+        }
+
+        document.getElementById('compForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            // Collecte des catégories cochées
+            const checkedCats = Array.from(document.querySelectorAll('#catCheckboxes input:checked')).map(cb => cb.value);
+
+            const payload = {
+                nom: document.getElementById('compNom').value,
+                date: document.getElementById('compDate').value,
+                lieu: document.getElementById('compLieu').value,
+                categorie: checkedCats.join(','),
+                description: document.getElementById('compDesc').value
+            };
+            const res = await fetch('/api/admin/competitions', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+            if (res.ok) {
+                closeCompModal();
+                loadCompetitions();
+            } else {
+                alert("Erreur lors de l'ajout.");
+            }
+        });
+
+        async function deleteComp(id) {
+            if (confirm("Supprimer cette compétition ?")) {
+                await fetch(`/api/admin/competitions?id=${id}`, { method: 'DELETE' });
+                loadCompetitions();
+            }
+        }
+
+        async function toggleRegistration(compId) {
+            const res = await fetch('/api/competitions/register', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ competition_id: compId })
+            });
+            if (res.ok) {
+                loadCompetitions();
+            } else {
+                alert("Erreur lors de l'inscription.");
+            }
+        }
+    </script>
+
+    <footer>
+        <div class="container footer-grid">
+            <div>
+                <img src="https://maquette-web-ejce.netlify.app/images.png" alt="Logo EJCE Footer" class="footer-logo">
+                <p>Adresse<br>La cressonière<br>97440 Saint-André</p>
+                <div class="footer-socials">
+                    <a href="https://www.facebook.com/EntenteJudoClubdelEst/" class="fb-btn" target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="Page Facebook Entente Judo Club de l'Est (ouvre un nouvel onglet)">
+                        <i class="fab fa-facebook-f" aria-hidden="true"></i>
+                        <span>Suivez l'EJCE sur facebook</span>
+                    </a>
+                </div>
+            </div>
+            <div>
+                <h4>Horaires des cours</h4>
+                <p>Lundi : 18h00<br>Vendredi : 19h15</p>
+            </div>
+            <div>
+                <h4>Plan du site</h4>
+                <nav aria-label="Plan du site">
+                    <ul>
+                        <li><a href='/'>Accueil</a></li>
+                        <li><a href='/judo'>Le Judo</a></li>
+                        <li><a href='/licencie'>Espace licencié</a></li>
+                        <li><a href="/revisions">Page révision</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div>
+                <h4>Notre Partenaire</h4>
+                <div class="footer-partner">
+                    <p style="font-size: 0.85rem; color: #ccc; margin-bottom: 8px;">Partenaire Officiel</p>
+                    <a href="https://www.ffsr.fr/" target="_blank" rel="noopener noreferrer"
+                        title="Fédération Française du Sport Sur Ordonnance / FFSR">
+                        <img src="/img/FFSR.png" alt="Logo FFSR - Partenaire Officiel" class="partner-logo">
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="container" style="margin-top: 30px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 15px;">
+            <div class="copyright">© 2026 EJCE - Tous droits réservés</div>
+            <div style="display:flex; gap: 20px; flex-wrap: wrap;">
+                <a href="/mentions-legales.html" style="font-size:0.82rem; color: #aaa !important;">Mentions légales</a>
+                <a href="/cgu.html" style="font-size:0.82rem; color: #aaa !important;">CGU</a>
+                <a href="/politique-confidentialite.html" style="font-size:0.82rem; color: #aaa !important;">Politique de confidentialité</a>
+            </div>
+        </div>
+    </footer>
+    <script src="/js/cookies.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Révisions | EJCE</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/revisions.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <div class="container nav">
+            <a href="/"><img src="https://maquette-web-ejce.netlify.app/images.png" class="logo"></a>
+            <div class="hamburger">
+                <span></span><span></span><span></span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href='/'>Accueil</a></li>
+                    <li><a href='/#judo'>Le Judo</a></li>
+                    <li><a href='/newsletter.html'>Newsletter</a></li>
+                    <li><a href='/pedagogique.html'>Équipe pédagogique</a></li>
+                    <li><a href='/contact.html'>Contact</a></li>
+                    <li><a href="/adhesion.html">adhérer au club</a></li>
+                </ul>
+            </nav>
+            <a class='cta' href='/connexion'>ESPACE LICENCIÉ</a>
+        </div>
+    </header>
+
+
+    <section class="page-title">
+        <h1>Techniques et exercices</h1>
+    </section>
+
+    <div class="filters container" id="beltFilters">
+        <button onclick="filterByBelt('all')">Tous</button>
+        <!-- Les boutons de filtres seront injectés ici -->
+    </div>
+
+    <section class="techniques container" id="techList">
+        <p style="text-align:center; padding: 50px;">Chargement des techniques...</p>
+    </section>
+
+    <!-- MODAL DETAIL (JS only) -->
+    <div id="detailSection"
+        style="display:none; padding:40px; background:white; border-radius:12px; box-shadow:0 10px 40px rgba(0,0,0,0.1); margin: 40px auto; max-width: 800px;">
+        <button onclick="closeDetail()" style="margin-bottom:20px;">← Retour</button>
+
+        <div id="detailViewMode">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+                <h2 id="detailTitle"></h2>
+                <div id="adminEditBtns" style="display:none;">
+                    <button onclick="editTech()"
+                        style="background:#f39c12; color:white; padding:8px 15px; border:none; border-radius:6px; cursor:pointer;">Éditer</button>
+                </div>
+            </div>
+            <p id="detailDesc" style="margin: 20px 0;"></p>
+            <div style="aspect-ratio: 16/9; width: 100%;">
+                <iframe id="videoFrame" src="" frameborder="0" allowfullscreen
+                    style="width:100%; height:100%;"></iframe>
+            </div>
+        </div>
+
+        <div id="detailEditMode" style="display:none;">
+            <h2>Modifier la technique</h2>
+            <input type="hidden" id="editTechId">
+            <div style="margin-bottom:15px;">
+                <label style="font-weight:600;">Nom de la technique :</label><br>
+                <input type="text" id="editTechNom"
+                    style="width:100%; padding:10px; border:1px solid #ddd; border-radius:6px; font-family:'Poppins', sans-serif;">
+            </div>
+            <div style="margin-bottom:15px;">
+                <label style="font-weight:600;">Description :</label><br>
+                <textarea id="editTechDesc"
+                    style="width:100%; padding:10px; border:1px solid #ddd; border-radius:6px; height:120px; font-family:'Poppins', sans-serif;"></textarea>
+            </div>
+            <div style="margin-bottom:15px;">
+                <label style="font-weight:600;">URL Vidéo (YouTube) :</label><br>
+                <input type="text" id="editTechVideo"
+                    style="width:100%; padding:10px; border:1px solid #ddd; border-radius:6px; font-family:'Poppins', sans-serif;">
+            </div>
+            <div style="margin-bottom:15px;">
+                <label style="font-weight:600;">Image de la technique :</label><br>
+                <input type="hidden" id="editTechImage">
+                <div id="dropZoneEditTech"
+                    style="border: 2px dashed #ddd; border-radius: 6px; padding: 20px; text-align: center; cursor: pointer; position: relative; background: #fafafa;">
+                    <span id="dropZoneTextEditTech" style="color:#666;">Glissez une image ici ou cliquez pour
+                        changer</span>
+                    <img id="previewEditTech" src=""
+                        style="display:none; max-width: 100%; max-height: 150px; margin-top: 10px; border-radius: 6px; display: block; margin-left: auto; margin-right: auto;">
+                    <input type="file" id="fileEditTech" accept="image/*"
+                        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer;">
+                </div>
+            </div>
+            <div style="display:flex; gap:10px; margin-top:20px;">
+                <button onclick="saveTechEdit()"
+                    style="background:#28a745; color:white; padding:12px 25px; border:none; border-radius:6px; cursor:pointer; font-weight:600;">Enregistrer</button>
+                <button onclick="cancelEdit()"
+                    style="background:#6c757d; color:white; padding:12px 25px; border:none; border-radius:6px; cursor:pointer; font-weight:600;">Annuler</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container footer-grid">
+            <div>
+                <img src="https://maquette-web-ejce.netlify.app/images.png" class="footer-logo">
+                <p>Adresse<br>La cressonière<br>97440 Saint-André</p>
+            </div>
+            <div>
+                <h4>Horaires</h4>
+                <p>Lundi : 18h00<br>Vendredi : 19h15</p>
+            </div>
+            <div>
+                <h4>Plan</h4>
+                <ul>
+                    <li><a href='/'>Accueil</a></li>
+                    <li><a href='/judo'>Le Judo</a></li>
+                    <li><a href='/licencie'>Espace licencié</a></li>
+                    <li><a href="/revisions">Page révision</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Notre Partenaire</h4>
+                <div class="footer-partner">
+                    <p style="font-size: 0.85rem; color: #ccc; margin-bottom: 8px;">Partenaire Officiel</p>
+                    <a href="https://www.ffsr.fr/" target="_blank" rel="noopener noreferrer"
+                        title="Fédération Française du Sport Sur Ordonnance / FFSR">
+                        <img src="/img/FFSR.png" alt="Logo FFSR - Partenaire Officiel" class="partner-logo">
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="container" style="margin-top: 30px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 15px;">
+            <div class="copyright">© 2026 EJCE - Tous droits réservés</div>
+            <div style="display:flex; gap: 20px; flex-wrap: wrap;">
+                <a href="/mentions-legales.html" style="font-size:0.82rem; color: #aaa !important;">Mentions légales</a>
+                <a href="/cgu.html" style="font-size:0.82rem; color: #aaa !important;">CGU</a>
+                <a href="/politique-confidentialite.html" style="font-size:0.82rem; color: #aaa !important;">Politique de confidentialité</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/js/script.js"></script>
+    <script>
+        let isAdmin = false;
+
+        async function init() {
+            // Check Admin status
+            try {
+                const resUser = await fetch('/api/user');
+                const userData = await resUser.json();
+                if (userData.role_id == 3) isAdmin = true;
+            } catch (e) { }
+
+            // Chargement des ceintures (Filtres)
+            const resBelts = await fetch('/api/belts');
+            const belts = await resBelts.json();
+
+            // On ne garde que les ceintures principales pour les filtres
+            const mainColors = ['blanc', 'jaune', 'orange', 'verte', 'bleue', 'marron', 'noir'];
+            const filteredBelts = belts.filter(b => mainColors.includes(b.couleur.toLowerCase()));
+
+            const filterContainer = document.getElementById('beltFilters');
+            filterContainer.innerHTML = `<button onclick="filterByBelt('all')">Tous</button>` + filteredBelts.map(b => `
+                <button onclick="filterByBelt('${b.couleur.toLowerCase()}')">${b.couleur}</button>
+            `).join('');
+
+            // Chargement des techniques
+            const resTechs = await fetch('/api/techniques');
+            allTechs = await resTechs.json();
+            renderTechs(allTechs);
+        }
+
+        function renderTechs(list) {
+            const container = document.getElementById('techList');
+            if (list.length === 0) { container.innerHTML = "<p>Aucune technique trouvée.</p>"; return; }
+            container.innerHTML = list.map(t => `
+                <div class="tech-card ${t.belt_category?.toLowerCase() || 'blanc'}">
+                    <img src="${t.imageUrl || 'https://maquette-web-ejce.netlify.app/ceintures.jpg'}" onclick="showTech(${t.id})" style="cursor:pointer; height:200px; object-fit:cover;">
+                    <h3>${t.nom}</h3>
+                    <div style="display:flex; gap:10px; margin-top:10px;">
+                        <button onclick="showTech(${t.id})" style="flex:1;">Voir plus</button>
+                        ${isAdmin ? `<button onclick="deleteTech(${t.id})" style="background:#444; color:white; flex:0.4;">Suppr</button>` : ''}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        async function deleteTech(id) {
+            if (!confirm("Supprimer cette technique ?")) return;
+            const res = await fetch(`/api/admin/techniques?id=${id}`, { method: 'DELETE' });
+            if (res.ok) {
+                allTechs = allTechs.filter(t => t.id != id);
+                renderTechs(allTechs);
+            }
+        }
+
+        function filterByBelt(color) {
+            if (color === 'all') renderTechs(allTechs);
+            else renderTechs(allTechs.filter(t => t.belt_category?.toLowerCase().includes(color)));
+        }
+
+        function showTech(id) {
+            const t = allTechs.find(t => t.id == id);
+            document.getElementById('techList').style.display = 'none';
+            document.getElementById('beltFilters').style.display = 'none';
+            document.getElementById('detailSection').style.display = 'block';
+
+            document.getElementById('detailViewMode').style.display = 'block';
+            document.getElementById('detailEditMode').style.display = 'none';
+
+            document.getElementById('detailTitle').innerText = t.nom;
+            document.getElementById('detailDesc').innerText = t.description;
+            document.getElementById('editTechId').value = id;
+
+            if (isAdmin) {
+                document.getElementById('adminEditBtns').style.display = 'block';
+            }
+
+            let videoURL = t.videoUrl || "";
+            if (videoURL.includes("watch?v=")) videoURL = videoURL.replace("watch?v=", "embed/");
+            document.getElementById("videoFrame").src = videoURL;
+        }
+
+        function editTech() {
+            document.getElementById('detailViewMode').style.display = 'none';
+            document.getElementById('detailEditMode').style.display = 'block';
+
+            const id = document.getElementById('editTechId').value;
+            const t = allTechs.find(t => t.id == id);
+
+            document.getElementById('editTechNom').value = t.nom || '';
+            document.getElementById('editTechDesc').value = t.description || '';
+            document.getElementById('editTechVideo').value = t.videoUrl || '';
+            document.getElementById('editTechImage').value = t.imageUrl || '';
+
+            if (t.imageUrl) {
+                document.getElementById('previewEditTech').src = t.imageUrl;
+                document.getElementById('previewEditTech').style.display = 'block';
+                document.getElementById('dropZoneTextEditTech').style.display = 'none';
+            } else {
+                document.getElementById('previewEditTech').style.display = 'none';
+                document.getElementById('dropZoneTextEditTech').style.display = 'block';
+                document.getElementById('dropZoneTextEditTech').innerText = "Glissez une image ici ou cliquez pour changer";
+            }
+        }
+
+        // Upload handler for technique image
+        document.getElementById('fileEditTech').addEventListener('change', async function () {
+            if (this.files && this.files[0]) {
+                const formData = new FormData();
+                formData.append('file', this.files[0]);
+
+                document.getElementById('dropZoneTextEditTech').style.display = 'block';
+                document.getElementById('dropZoneTextEditTech').innerText = "Téléchargement en cours...";
+                try {
+                    const res = await fetch('/api/upload', { method: 'POST', body: formData });
+                    const data = await res.json();
+                    if (res.ok && data.url) {
+                        document.getElementById('editTechImage').value = data.url;
+                        document.getElementById('previewEditTech').src = data.url;
+                        document.getElementById('previewEditTech').style.display = 'block';
+                        document.getElementById('dropZoneTextEditTech').style.display = 'none';
+                    } else {
+                        alert(data.error || "Erreur d'upload");
+                        document.getElementById('dropZoneTextEditTech').innerText = "Glissez une image ici ou cliquez pour changer";
+                    }
+                } catch (e) {
+                    alert("Erreur réseau");
+                    document.getElementById('dropZoneTextEditTech').innerText = "Glissez une image ici ou cliquez pour changer";
+                }
+            }
+        });
+
+        function cancelEdit() {
+            document.getElementById('detailViewMode').style.display = 'block';
+            document.getElementById('detailEditMode').style.display = 'none';
+        }
+
+        async function saveTechEdit() {
+            const id = document.getElementById('editTechId').value;
+            const payload = {
+                id: id,
+                nom: document.getElementById('editTechNom').value,
+                description: document.getElementById('editTechDesc').value,
+                videoUrl: document.getElementById('editTechVideo').value,
+                imageUrl: document.getElementById('editTechImage').value
+            };
+
+            try {
+                const res = await fetch('/api/admin/techniques', {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if (res.ok) {
+                    const tIndex = allTechs.findIndex(t => t.id == id);
+                    if (tIndex !== -1) {
+                        allTechs[tIndex] = { ...allTechs[tIndex], ...payload };
+                    }
+                    renderTechs(allTechs);
+                    cancelEdit();
+                    showTech(id);
+                } else {
+                    alert("Erreur lors de la modification");
+                }
+            } catch (e) {
+                alert("Erreur réseau");
+            }
+        }
+
+        function closeDetail() {
+            document.getElementById('detailSection').style.display = 'none';
+            document.getElementById('techList').style.display = 'grid';
+            document.getElementById('beltFilters').style.display = 'flex';
+        }
+
+        init();
+    </script>
+</body>
+
+</html>

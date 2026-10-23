@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EJCE - Entente Judo Club de l'Est</title>
+
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/index.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        p {
+            text-align: justify;
+        }
+
+        .hero p,
+        .judo-header p,
+        .moral-code-section>p,
+        .belts-container>p,
+        .stats p,
+        .kano-caption {
+            text-align: center !important;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 25px;
+        }
+
+        .hero p {
+            font-size: 30px !important;
+            margin-bottom: 25px;
+            line-height: 1.4;
+            text-align: center;
+        }
+
+        .hero-buttons {
+            margin-top: 25px;
+        }
+
+        .stats h4 {
+            font-size: 3.5rem;
+            color: #c62828;
+            margin-bottom: 15px;
+        }
+
+        .stats p {
+            font-size: 1.2rem;
+        }
+
+        .numbers {
+            gap: 60px;
+            margin-top: 40px;
+        }
+
+        footer a {
+            color: #ffffff !important;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        footer a:hover {
+            color: #c62828 !important;
+        }
+
+        nav ul li a,
+        .cta {
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        .logo {
+            height: 80px !important;
+            width: auto;
+        }
+
+        .judo-info {
+            padding: 0 40px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="container nav">
+            <a href="/"><img src="https://maquette-web-ejce.netlify.app/images.png" class="logo"></a>
+            <div class="hamburger">
+                <span></span><span></span><span></span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href='/'>Accueil</a></li>
+                    <li><a href='/#judo'>Le Judo</a></li>
+                    <li><a href='/newsletter.html'>Newsletter</a></li>
+                    <li><a href='/pedagogique.html'>Équipe pédagogique</a></li>
+                    <li><a href='/contact.html'>Contact</a></li>
+                    <li><a href="/adhesion.html">adhérer au club</a></li>
+                </ul>
+            </nav>
+            <a class='cta' href='/connexion'>ESPACE LICENCIÉ</a>
+        </div>
+    </header>
+
+    <section class="hero">
+
+        <div class="hero-content">
+            <h1>Entente Judo Club de l'Est</h1>
+            <p>Discipline • Respect • Persévérance</p>
+
+            <div class="hero-buttons">
+                <button class="btn" id="btn">Voir les options d'inscription</button>
+            </div>
+        </div>
+
+    </section>
+
+    <section class="presentation container">
+
+        <h2>Présentation du club</h2>
+
+        <p>
+            L'<strong>Entente Judo Club de l'Est (EJCE)</strong> est un club de judo situé à
+            <strong>Saint-André</strong>, sur l'île de <strong>La Réunion</strong>. Depuis sa création en
+            <strong>2001</strong>, l'association développe la pratique du judo dans l'Est de l'île en
+            transmettant les valeurs fondamentales de cet art martial : <strong>respect, discipline,
+                persévérance et entraide</strong>.
+        </p>
+
+        <p>
+            Le dojo accueille <strong>adolescents et adultes</strong>, débutants comme
+            pratiquants confirmés. Les entraînements permettent d'apprendre ou de perfectionner les
+            techniques du judo dans une ambiance conviviale et motivante. Les judokas peuvent progresser
+            à leur rythme, améliorer leur condition physique et développer leur confiance en eux.
+        </p>
+
+        <p>
+            Les cours se déroulent au <strong>dojo de la Cressonnière à Saint-André</strong>, où les
+            licenciés se retrouvent chaque semaine pour pratiquer, s'entraîner et partager leur passion
+            pour le judo. Le club participe également à différentes activités sportives, compétitions
+            et événements associatifs tout au long de l'année.
+        </p>
+
+        <p>
+            Plus qu'un simple club sportif, l'<strong>EJCE</strong> est un lieu de rencontre et
+            d'apprentissage où chacun peut s'épanouir à travers le sport et les valeurs éducatives du
+            judo. Le club poursuit aujourd'hui son objectif : <strong>former des judokas, transmettre
+                une passion et faire vivre l'esprit du judo dans l'Est de La Réunion</strong>.
+        </p>
+
+        <div class="images">
+
+            <div class="card">
+                <img src="https://maquette-web-ejce.netlify.app/dojo1.jpg">
+            </div>
+
+            <div class="card">
+                <img src="https://maquette-web-ejce.netlify.app/dojo2.jpg">
+            </div>
+        </div>
+    </section>
+
+    <section id="judo" class="judo-section container">
+        <div class="judo-header">
+            <h2>L'Esprit du Judo</h2>
+            <p class="subtitle">"Entraide et prospérité mutuelle"</p>
+        </div>
+
+        <div class="judo-flex">
+            <div class="judo-kano">
+                <img src="https://maquette-web-ejce.netlify.app/jigoro-kano.jpg" alt="Jigoro Kano" class="kano-img">
+                <p class="kano-caption">Jigoro Kano, Fondateur du Judo</p>
+            </div>
+            <div class="judo-info">
+                <h3>Une discipline éducative</h3>
+                <p>Le judo, ou « voie de la souplesse », a été créé en 1882 par <strong>Jigoro Kano</strong>. Plus qu'un
+                    simple sport de combat, c'est une méthode d'éducation physique et morale conçue pour permettre à
+                    l'homme d'utiliser au mieux son énergie physique et mentale.</p>
+                <p>Le principe fondamental est simple : <em>"Minimum d'effort, maximum d'efficacité"</em>. Il s'agit de
+                    céder à la force pour mieux la vaincre, en utilisant le mouvement de l'adversaire.</p>
+            </div>
+        </div>
+
+        <div class="moral-code-section">
+            <h3>Le Code Moral</h3>
+            <p>Le judoka s'engage à respecter des valeurs fondamentales sur et en dehors du tatami :</p>
+            <div class="code-grid">
+                <div class="code-item"><span>La Politesse</span>
+                    <p>C'est le respect d'autrui</p>
+                </div>
+                <div class="code-item"><span>Le Courage</span>
+                    <p>C'est faire ce qui est juste</p>
+                </div>
+                <div class="code-item"><span>La Sincérité</span>
+                    <p>C'est s'exprimer sans déguiser sa pensée</p>
+                </div>
+                <div class="code-item"><span>L'Honneur</span>
+                    <p>C'est être fidèle à la parole donnée</p>
+                </div>
+                <div class="code-item"><span>La Modestie</span>
+                    <p>C'est parler de soi sans orgueil</p>
+                </div>
+                <div class="code-item"><span>Le Respect</span>
+                    <p>Sans lui aucune confiance ne peut naître</p>
+                </div>
+                <div class="code-item"><span>Le Contrôle de soi</span>
+                    <p>C'est savoir se taire quand monte sa colère</p>
+                </div>
+                <div class="code-item"><span>L'Amitié</span>
+                    <p>C'est le plus pur des sentiments humains</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="belts-container">
+            <h3>La progression (Kyu & Dan)</h3>
+            <p>Chaque ceinture marque une étape vers la maîtrise technique et mentale.</p> <br>
+            <div class="belts-list">
+                <div class="belt-item">
+                    <div class="belt-graphic belt-white"></div>
+                    <span class="belt-name">Blanche</span>
+                    <span class="belt-rank">6ème Kyu</span>
+                </div>
+                <div class="belt-item">
+                    <div class="belt-graphic belt-yellow"></div>
+                    <span class="belt-name">Jaune</span>
+                    <span class="belt-rank">5ème Kyu</span>
+                </div>
+                <div class="belt-item">
+                    <div class="belt-graphic belt-orange"></div>
+                    <span class="belt-name">Orange</span>
+                    <span class="belt-rank">4ème Kyu</span>
+                </div>
+                <div class="belt-item">
+                    <div class="belt-graphic belt-green"></div>
+                    <span class="belt-name">Verte</span>
+                    <span class="belt-rank">3ème Kyu</span>
+                </div>
+                <div class="belt-item">
+                    <div class="belt-graphic belt-blue"></div>
+                    <span class="belt-name">Bleue</span>
+                    <span class="belt-rank">2ème Kyu</span>
+                </div>
+                <div class="belt-item">
+                    <div class="belt-graphic belt-brown"></div>
+                    <span class="belt-name">Marron</span>
+                    <span class="belt-rank">1er Kyu</span>
+                </div>
+                <div class="belt-item">
+                    <div class="belt-graphic belt-black"></div>
+                    <span class="belt-name">Noire</span>
+                    <span class="belt-rank">1er - 5ème Dan</span>
+                </div>
+                <div class="belt-item">
+                    <div class="belt-graphic belt-red-white"></div>
+                    <span class="belt-name">Blanche-Rouge</span>
+                    <span class="belt-rank">6ème - 8ème Dan</span>
+                </div>
+                <div class="belt-item">
+                    <div class="belt-graphic belt-red"></div>
+                    <span class="belt-name">Rouge</span>
+                    <span class="belt-rank">9ème - 10ème Dan</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="infos container">
+
+        <div class="map">
+
+            <h3>Ou sommes nous ?</h3>
+
+            <div class="mapbox">
+                <iframe
+                    src="https://maps.google.com/maps?q=Gymnase%20de%20la%20Cressonni%C3%A8re%2C%20Saint-Andr%C3%A9%2097440&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                    width="100%" height="100%" style="border:0; border-radius: 6px;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+
+            <p>La cressonière, Saint-André, Réunion, Réunion, 97440</p>
+
+        </div>
+
+        <div class="stats">
+
+            <h3>Statistiques du club</h3>
+
+            <p>
+                Rejoignez notre passion du Judo et découvrez nos exploits !
+            </p>
+
+            <div class="numbers">
+
+                <div>
+                    <h4>3</h4>
+                    <p>Professeurs diplomés</p>
+                </div>
+
+                <div>
+                    <h4>25</h4>
+                    <p>Ans d'existence</p>
+                </div>
+
+                <div>
+                    <h4>100%</h4>
+                    <p>Esprit club</p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <footer>
+        <div class="container footer-grid">
+            <div>
+                <img src="https://maquette-web-ejce.netlify.app/images.png" class="footer-logo">
+                <p>
+                    Adresse<br>
+                    La cressonière<br>
+                    97440 Saint-André
+                </p>
+                <div class="footer-socials">
+                    <a href="https://www.facebook.com/EntenteJudoClubdelEst/" class="fb-btn" target="_blank"
+                        rel="noopener noreferrer">
+                        <i class="fab fa-facebook-f"></i>
+                        <span>Suivez l'EJCE sur facebook</span>
+                    </a>
+                </div>
+            </div>
+
+            <div>
+                <h4>Horaires des cours</h4>
+                <p>
+                    Lundi : 18h00<br>
+                    Vendredi : 19h15
+                </p>
+            </div>
+
+            <div>
+                <h4>Plan du site</h4>
+                <ul>
+                    <li><a href='/'>Accueil</a></li>
+                    <li><a href='/judo'>Le Judo</a></li>
+                    <li><a href='/licencie'>Espace licencié</a></li>
+                    <li><a href="/revisions">Page révision</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4>Notre Partenaire</h4>
+                <div class="footer-partner">
+                    <p style="font-size: 0.85rem; color: #ccc; margin-bottom: 8px;">Partenaire Officiel</p>
+                    <a href="https://www.ffsr.fr/" target="_blank" rel="noopener noreferrer"
+                        title="Fédération Française du Sport Sur Ordonnance / FFSR">
+                        <img src="/img/FFSR.png" alt="Logo FFSR - Partenaire Officiel" class="partner-logo">
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="container" style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 15px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); margin-top: 30px;">
+            <div class="copyright">© 2026 EJCE - Tous droits réservés</div>
+            <div style="display:flex; gap: 20px; flex-wrap: wrap;">
+                <a href="/mentions-legales.html" style="font-size:0.82rem; color: #aaa !important;">Mentions légales</a>
+                <a href="/cgu.html" style="font-size:0.82rem; color: #aaa !important;">CGU</a>
+                <a href="/politique-confidentialite.html" style="font-size:0.82rem; color: #aaa !important;">Politique de confidentialité</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/js/script.js"></script>
+    <script src="/js/cookies.js"></script>
+    <script>
+        const lisence = document.getElementById("btn")
+        lisence.addEventListener('click', () => {
+            window.location.href = "/adhesion"
+        });
+    </script>
+
+</body>
+
+</html>

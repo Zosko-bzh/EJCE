@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexion - EJCE</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/login.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body style="background-color: #f7f7f7;">
+
+    <header>
+        <div class="container nav">
+            <a href="/"><img src="https://maquette-web-ejce.netlify.app/images.png" alt="Logo EJCE" class="logo"
+                    style="height: 70px;"></a>
+            <button class="hamburger" aria-label="Ouvrir le menu de navigation" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
+            <nav aria-label="Navigation principale">
+                <ul>
+                    <li><a href='/'>Accueil</a></li>
+                    <li><a href='/judo'>Le Judo</a></li>
+                    <li><a href='/newsletter'>Newsletter</a></li>
+                    <li><a href='/Nos encadrants'>Équipe pédagogique</a></li>
+                    <li><a href='/contact'>Contact</a></li>
+                    <li><a href="/adhesion">adhérer au club</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+
+    <main style="padding: 60px 20px; min-height: 60vh;">
+        <div
+            style="max-width: 450px; margin: 0 auto; background: white; padding: 40px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.08);">
+            <h1
+                style="font-family: 'Poppins', sans-serif; text-align: center; color: #b22222; margin-bottom: 20px; font-size: 1.8rem;">
+                Espace Licencié</h1>
+            <p style="text-align: center; color: #555; margin-bottom: 30px;">Accédez à votre compte pour suivre votre
+                progression.</p>
+
+            <form id="loginForm">
+                <div id="loginError" role="alert" aria-live="assertive"
+                    style="display: none; background: #fee2e2; color: #b91c1c; padding: 12px; border-radius: 6px; margin-bottom: 20px; text-align: center;">
+                    Identifiants incorrects.</div>
+
+                <div style="margin-bottom: 20px;">
+                    <label for="email"
+                        style="display: block; margin-bottom: 8px; font-weight: 600; font-family: 'Poppins', sans-serif;">Adresse
+                        Email</label>
+                    <input type="email" id="email" name="email" required autocomplete="email"
+                        style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 6px; font-family: 'Poppins', sans-serif;">
+                </div>
+
+                <div style="margin-bottom: 20px;">
+                    <label for="password"
+                        style="display: block; margin-bottom: 8px; font-weight: 600; font-family: 'Poppins', sans-serif;">Mot
+                        de passe</label>
+                    <input type="password" id="password" name="password" required autocomplete="current-password"
+                        style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 6px; font-family: 'Poppins', sans-serif;">
+                </div>
+
+                <button type="submit"
+                    style="width: 100%; background: #b22222; color: white; border: none; padding: 15px; border-radius: 6px; font-size: 16px; font-weight: 600; cursor: pointer; transition: 0.3s;">Se
+                    connecter</button>
+
+                <div style="text-align: center; margin-top: 15px;">
+                    <a href="#" id="forgotBtn" style="color: #666; font-size: 0.9rem; text-decoration: underline;">Mot
+                        de passe oublié ?</a>
+                </div>
+                <div id="forgotMsg" role="status" aria-live="polite"
+                    style="margin-top: 15px; text-align: center; font-weight: bold; font-size: 0.9rem;">
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container footer-grid">
+            <div>
+                <img src="https://maquette-web-ejce.netlify.app/images.png" alt="Logo EJCE Footer" class="footer-logo">
+                <p>Adresse<br>La cressonière<br>97440 Saint-André</p>
+                <div class="footer-socials">
+                    <a href="https://www.facebook.com/EntenteJudoClubdelEst/" class="fb-btn" target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="Page Facebook Entente Judo Club de l'Est (ouvre un nouvel onglet)">
+                        <i class="fab fa-facebook-f" aria-hidden="true"></i>
+                        <span>Suivez l'EJCE sur facebook</span>
+                    </a>
+                </div>
+            </div>
+            <div>
+                <h4>Horaires des cours</h4>
+                <p>Lundi : 18h00<br>Vendredi : 19h15</p>
+            </div>
+            <div>
+                <h4>Plan du site</h4>
+                <nav aria-label="Plan du site">
+                    <ul>
+                        <li><a href='/'>Accueil</a></li>
+                        <li><a href='/judo'>Le Judo</a></li>
+                        <li><a href='/licencie'>Espace licencié</a></li>
+                        <li><a href="révisions.html">Page révision</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div>
+                <h4>Notre Partenaire</h4>
+                <div class="footer-partner">
+                    <p style="font-size: 0.85rem; color: #ccc; margin-bottom: 8px;">Partenaire Officiel</p>
+                    <a href="https://www.ffsr.fr/" target="_blank" rel="noopener noreferrer"
+                        title="Fédération Française du Sport Sur Ordonnance / FFSR">
+                        <img src="/img/FFSR.png" alt="Logo FFSR - Partenaire Officiel" class="partner-logo">
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="container" style="margin-top: 30px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 15px;">
+            <div class="copyright">© 2026 EJCE - Tous droits réservés</div>
+            <div style="display:flex; gap: 20px; flex-wrap: wrap;">
+                <a href="/mentions-legales.html" style="font-size:0.82rem; color: #aaa !important;">Mentions légales</a>
+                <a href="/cgu.html" style="font-size:0.82rem; color: #aaa !important;">CGU</a>
+                <a href="/politique-confidentialite.html" style="font-size:0.82rem; color: #aaa !important;">Politique de confidentialité</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/js/script.js"></script>
+    <script src="/js/login.js"></script>
+    <script src="/js/cookies.js"></script>
+</body>
+
+</html>

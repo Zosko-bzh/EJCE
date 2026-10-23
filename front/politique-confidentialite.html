@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Politique de confidentialité | EJCE</title>
+    <meta name="description" content="Politique de confidentialité et protection des données personnelles (RGPD) du site de l'Entente Judo Club de l'Est (EJCE).">
+    <link rel="stylesheet" href="/css/global.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        p { text-align: justify; }
+
+        nav ul li a, .cta {
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        .logo { height: 80px !important; width: auto; }
+        footer a { color: #ffffff !important; text-decoration: none; transition: 0.3s; }
+        footer a:hover { color: #c62828 !important; }
+
+        .legal-hero {
+            background: linear-gradient(135deg, #b71c1c 0%, #c62828 60%, #e53935 100%);
+            color: white;
+            padding: 70px 0 50px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .legal-hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        .legal-hero h1 {
+            font-size: 2.8rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            position: relative;
+        }
+
+        .legal-hero .breadcrumb {
+            font-size: 0.95rem;
+            opacity: 0.85;
+            position: relative;
+        }
+
+        .legal-hero .breadcrumb a { color: white; text-decoration: none; }
+        .legal-hero .breadcrumb a:hover { text-decoration: underline; }
+
+        .legal-content {
+            max-width: 860px;
+            margin: 0 auto;
+            padding: 60px 20px 80px;
+        }
+
+        .legal-section {
+            background: white;
+            border-radius: 12px;
+            padding: 40px 44px;
+            margin-bottom: 28px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            border-left: 4px solid #c62828;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .legal-section.visible { opacity: 1; transform: translateY(0); }
+
+        .legal-section h2 {
+            font-size: 1.35rem;
+            color: #c62828;
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .legal-section h2 i { font-size: 1.1rem; }
+
+        .legal-section p, .legal-section li {
+            font-size: 0.97rem;
+            line-height: 1.8;
+            color: #444;
+        }
+
+        .legal-section ul {
+            padding-left: 20px;
+            margin-top: 10px;
+        }
+
+        .legal-section li { margin-bottom: 6px; }
+
+        .legal-section a {
+            color: #c62828;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .legal-section a:hover { text-decoration: underline; }
+
+        .article-num {
+            display: inline-block;
+            background: #c62828;
+            color: white;
+            border-radius: 50%;
+            width: 28px;
+            height: 28px;
+            line-height: 28px;
+            text-align: center;
+            font-size: 0.85rem;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+
+        .last-update {
+            text-align: center;
+            font-size: 0.85rem;
+            color: #888;
+            margin-bottom: 40px;
+        }
+
+        .nav-legal {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 50px;
+        }
+
+        .nav-legal a {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 10px 20px;
+            background: white;
+            border: 2px solid #c62828;
+            color: #c62828;
+            border-radius: 8px;
+            font-size: 0.88rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .nav-legal a:hover, .nav-legal a.active {
+            background: #c62828;
+            color: white;
+        }
+
+        /* Cookie table */
+        .cookie-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 18px;
+            font-size: 0.9rem;
+        }
+
+        .cookie-table th {
+            background: #c62828;
+            color: white;
+            padding: 10px 14px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .cookie-table td {
+            padding: 10px 14px;
+            border-bottom: 1px solid #f0f0f0;
+            color: #444;
+            vertical-align: top;
+        }
+
+        .cookie-table tr:nth-child(even) td { background: #fafafa; }
+
+        .badge {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 0.78rem;
+            font-weight: 600;
+        }
+
+        .badge-essential { background: #e8f5e9; color: #2e7d32; }
+        .badge-functional { background: #fff3e0; color: #e65100; }
+        .badge-none { background: #f5f5f5; color: #757575; }
+
+        .rights-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 18px;
+            margin-top: 18px;
+        }
+
+        .right-card {
+            background: #fff8f8;
+            border: 1px solid #ffcdd2;
+            border-radius: 10px;
+            padding: 18px 16px;
+            text-align: center;
+        }
+
+        .right-card i {
+            font-size: 1.6rem;
+            color: #c62828;
+            margin-bottom: 10px;
+        }
+
+        .right-card h3 {
+            font-size: 0.95rem;
+            color: #333;
+            margin-bottom: 6px;
+        }
+
+        .right-card p {
+            font-size: 0.83rem;
+            color: #666;
+            text-align: center !important;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 768px) {
+            .legal-hero h1 { font-size: 2rem; }
+            .legal-section { padding: 25px 22px; }
+            .cookie-table { font-size: 0.8rem; }
+            .cookie-table th, .cookie-table td { padding: 8px 10px; }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="container nav">
+            <a href="/"><img src="https://maquette-web-ejce.netlify.app/images.png" class="logo" alt="Logo EJCE"></a>
+            <div class="hamburger">
+                <span></span><span></span><span></span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href='/'>Accueil</a></li>
+                    <li><a href='/#judo'>Le Judo</a></li>
+                    <li><a href='/newsletter.html'>Newsletter</a></li>
+                    <li><a href='/pedagogique.html'>Équipe pédagogique</a></li>
+                    <li><a href='/contact.html'>Contact</a></li>
+                    <li><a href="/adhesion.html">adhérer au club</a></li>
+                </ul>
+            </nav>
+            <a class='cta' href='/connexion'>ESPACE LICENCIÉ</a>
+        </div>
+    </header>
+
+    <section class="legal-hero">
+        <h1><i class="fas fa-shield-alt" style="margin-right:12px;"></i>Politique de confidentialité</h1>
+        <p class="breadcrumb"><a href="/">Accueil</a> &rsaquo; Politique de confidentialité</p>
+    </section>
+
+    <main class="legal-content">
+        <p class="last-update">Dernière mise à jour : 1er août 2026 — Conforme au RGPD (Règlement UE 2016/679)</p>
+
+        <div class="nav-legal">
+            <a href="/mentions-legales.html"><i class="fas fa-balance-scale"></i> Mentions légales</a>
+            <a href="/cgu.html"><i class="fas fa-file-contract"></i> CGU</a>
+            <a href="/politique-confidentialite.html" class="active"><i class="fas fa-shield-alt"></i> Confidentialité</a>
+        </div>
+
+        <div class="legal-section">
+            <h2><i class="fas fa-info-circle"></i> Introduction</h2>
+            <p>L'<strong>Entente Judo Club de l'Est (EJCE)</strong> s'engage à protéger la vie privée de ses visiteurs et membres. La présente politique de confidentialité explique comment nous collectons, utilisons et protégeons vos données personnelles, conformément au <strong>Règlement Général sur la Protection des Données (RGPD)</strong> et à la loi française « Informatique et Libertés ».</p>
+            <p style="margin-top:12px;"><strong>Responsable du traitement :</strong> Entente Judo Club de l'Est (EJCE), Dojo de la Cressonnière, 97440 Saint-André, La Réunion.</p>
+        </div>
+
+        <div class="legal-section">
+            <h2><span class="article-num">1</span> Données collectées</h2>
+            <p>Selon vos interactions avec le site, nous pouvons collecter les données suivantes :</p>
+            <ul>
+                <li><strong>Formulaire de contact :</strong> nom, adresse email, objet et contenu du message</li>
+                <li><strong>Newsletter :</strong> prénom, nom, adresse email</li>
+                <li><strong>Dossier d'adhésion :</strong> informations contenues dans le formulaire d'inscription (nom, prénom, coordonnées, etc.)</li>
+                <li><strong>Espace licencié :</strong> identifiant (email) et mot de passe hashé pour l'authentification</li>
+                <li><strong>Données de navigation :</strong> adresse IP, type de navigateur, pages consultées (via les journaux serveur, à des fins de sécurité uniquement)</li>
+            </ul>
+        </div>
+
+        <div class="legal-section">
+            <h2><span class="article-num">2</span> Finalités et bases légales du traitement</h2>
+            <p>Vos données sont traitées pour les finalités suivantes :</p>
+            <ul>
+                <li><strong>Répondre à vos messages</strong> — base légale : intérêt légitime</li>
+                <li><strong>Envoi de la newsletter</strong> — base légale : consentement (art. 6(1)(a) RGPD)</li>
+                <li><strong>Gestion des adhésions</strong> — base légale : exécution d'un contrat / démarche précontractuelle</li>
+                <li><strong>Authentification sur l'espace licencié</strong> — base légale : exécution d'un contrat</li>
+                <li><strong>Sécurité du site</strong> — base légale : intérêt légitime</li>
+            </ul>
+        </div>
+
+        <div class="legal-section">
+            <h2><span class="article-num">3</span> Durée de conservation</h2>
+            <ul>
+                <li><strong>Messages de contact :</strong> 3 ans à compter de la dernière interaction</li>
+                <li><strong>Données newsletter :</strong> jusqu'à désinscription, puis suppression sous 30 jours</li>
+                <li><strong>Dossiers d'adhésion :</strong> durée de la relation associative + 5 ans (obligations légales)</li>
+                <li><strong>Comptes licenciés :</strong> durée de la licence active + 1 an après départ du club</li>
+                <li><strong>Journaux serveur :</strong> 12 mois maximum</li>
+            </ul>
+        </div>
+
+        <div class="legal-section">
+            <h2><span class="article-num">4</span> Partage des données</h2>
+            <p>L'EJCE ne vend ni ne loue vos données personnelles à des tiers. Les données peuvent être partagées uniquement dans les cas suivants :</p>
+            <ul>
+                <li>Avec les membres du bureau de l'association pour la gestion administrative</li>
+                <li>Avec des prestataires techniques (hébergeur) dans le strict cadre de leurs missions et sous accord de confidentialité</li>
+                <li>Sur réquisition légale des autorités compétentes</li>
+            </ul>
+        </div>
+
+        <div class="legal-section" id="cookies">
+            <h2><span class="article-num">5</span> Cookies</h2>
+            <p>Notre site utilise des cookies. Un cookie est un petit fichier texte déposé sur votre navigateur lors de votre visite. Voici les cookies utilisés :</p>
+
+            <table class="cookie-table">
+                <thead>
+                    <tr>
+                        <th>Nom</th>
+                        <th>Type</th>
+                        <th>Durée</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>ejce_token</code></td>
+                        <td><span class="badge badge-essential">Essentiel</span></td>
+                        <td>Session</td>
+                        <td>Token d'authentification pour l'espace licencié</td>
+                    </tr>
+                    <tr>
+                        <td><code>ejce_cookie_consent</code></td>
+                        <td><span class="badge badge-essential">Essentiel</span></td>
+                        <td>12 mois</td>
+                        <td>Mémorise votre choix concernant les cookies</td>
+                    </tr>
+                    <tr>
+                        <td>Google Maps</td>
+                        <td><span class="badge badge-functional">Fonctionnel</span></td>
+                        <td>Variable</td>
+                        <td>Cookies déposés par Google pour l'affichage de la carte intégrée</td>
+                    </tr>
+                    <tr>
+                        <td>Trackers tiers</td>
+                        <td><span class="badge badge-none">Aucun</span></td>
+                        <td>—</td>
+                        <td>Aucun outil de tracking publicitaire ou analytique n'est utilisé</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p style="margin-top:18px;">Vous pouvez à tout moment modifier vos préférences de cookies via les paramètres de votre navigateur ou en cliquant sur le bouton ci-dessous.</p>
+            <button id="reopen-cookie-banner" onclick="reopenCookieBanner()" style="margin-top:14px; background:#c62828; color:white; border:none; padding:10px 22px; border-radius:6px; cursor:pointer; font-family:'Poppins',sans-serif; font-weight:600; font-size:0.9rem; transition:background 0.3s;">
+                <i class="fas fa-cookie-bite" style="margin-right:8px;"></i>Gérer mes préférences cookies
+            </button>
+        </div>
+
+        <div class="legal-section">
+            <h2><span class="article-num">6</span> Vos droits (RGPD)</h2>
+            <p>Conformément au RGPD, vous disposez des droits suivants sur vos données personnelles :</p>
+
+            <div class="rights-grid">
+                <div class="right-card">
+                    <i class="fas fa-eye"></i>
+                    <h3>Droit d'accès</h3>
+                    <p>Obtenir une copie des données vous concernant</p>
+                </div>
+                <div class="right-card">
+                    <i class="fas fa-edit"></i>
+                    <h3>Droit de rectification</h3>
+                    <p>Corriger des données inexactes ou incomplètes</p>
+                </div>
+                <div class="right-card">
+                    <i class="fas fa-trash-alt"></i>
+                    <h3>Droit à l'effacement</h3>
+                    <p>Demander la suppression de vos données</p>
+                </div>
+                <div class="right-card">
+                    <i class="fas fa-hand-paper"></i>
+                    <h3>Droit d'opposition</h3>
+                    <p>Vous opposer au traitement de vos données</p>
+                </div>
+                <div class="right-card">
+                    <i class="fas fa-pause-circle"></i>
+                    <h3>Droit à la limitation</h3>
+                    <p>Demander la suspension temporaire du traitement</p>
+                </div>
+                <div class="right-card">
+                    <i class="fas fa-download"></i>
+                    <h3>Droit à la portabilité</h3>
+                    <p>Recevoir vos données dans un format structuré</p>
+                </div>
+            </div>
+
+            <p style="margin-top:22px;">Pour exercer ces droits, contactez-nous via la <a href="/contact.html">page de contact</a>. Nous répondrons dans un délai maximum d'<strong>un mois</strong>. Vous pouvez également introduire une réclamation auprès de la <strong>CNIL</strong> : <a href="https://www.cnil.fr" target="_blank" rel="noopener">www.cnil.fr</a>.</p>
+        </div>
+
+        <div class="legal-section">
+            <h2><span class="article-num">7</span> Sécurité des données</h2>
+            <p>L'EJCE met en œuvre des mesures techniques et organisationnelles appropriées pour protéger vos données contre tout accès non autorisé, perte ou divulgation :</p>
+            <ul>
+                <li>Mots de passe stockés sous forme hashée (bcrypt)</li>
+                <li>Accès aux données administrateur restreint par authentification</li>
+                <li>Communication sécurisée via HTTPS</li>
+                <li>Accès aux données limité aux personnes habilitées</li>
+            </ul>
+        </div>
+
+        <div class="legal-section">
+            <h2><span class="article-num">8</span> Modifications de la politique</h2>
+            <p>L'EJCE se réserve le droit de modifier la présente politique de confidentialité. Toute modification substantielle sera signalée sur le site. La date de dernière mise à jour figure en haut de cette page.</p>
+        </div>
+
+        <div class="legal-section">
+            <h2><i class="fas fa-envelope"></i> Nous contacter</h2>
+            <p>Pour toute question relative à vos données personnelles ou pour exercer vos droits, contactez-nous via la <a href="/contact.html">page de contact</a> ou par courrier postal à l'adresse du club.</p>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container footer-grid">
+            <div>
+                <img src="https://maquette-web-ejce.netlify.app/images.png" class="footer-logo" alt="Logo EJCE">
+                <p>Adresse<br>La cressonière<br>97440 Saint-André</p>
+                <div class="footer-socials">
+                    <a href="https://www.facebook.com/EntenteJudoClubdelEst/" class="fb-btn" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-facebook-f"></i>
+                        <span>Suivez l'EJCE sur facebook</span>
+                    </a>
+                </div>
+            </div>
+            <div>
+                <h4>Horaires des cours</h4>
+                <p>Lundi : 18h00<br>Vendredi : 19h15</p>
+            </div>
+            <div>
+                <h4>Plan du site</h4>
+                <ul>
+                    <li><a href='/'>Accueil</a></li>
+                    <li><a href='/#judo'>Le Judo</a></li>
+                    <li><a href='/licencie'>Espace licencié</a></li>
+                    <li><a href="/revisions">Page révision</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Notre Partenaire</h4>
+                <div class="footer-partner">
+                    <p style="font-size: 0.85rem; color: #ccc; margin-bottom: 8px;">Partenaire Officiel</p>
+                    <a href="https://www.ffsr.fr/" target="_blank" rel="noopener noreferrer" title="Fédération Française du Sport Sur Ordonnance / FFSR">
+                        <img src="/img/FFSR.png" alt="Logo FFSR - Partenaire Officiel" class="partner-logo">
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="container" style="margin-top: 30px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 15px;">
+            <div class="copyright">© 2026 EJCE - Tous droits réservés</div>
+            <div style="display:flex; gap: 20px; flex-wrap: wrap;">
+                <a href="/mentions-legales.html" style="font-size:0.82rem; color: #aaa !important;">Mentions légales</a>
+                <a href="/cgu.html" style="font-size:0.82rem; color: #aaa !important;">CGU</a>
+                <a href="/politique-confidentialite.html" style="font-size:0.82rem; color: #aaa !important;">Politique de confidentialité</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/js/script.js"></script>
+    <script>
+        const sections = document.querySelectorAll('.legal-section');
+        const obs = new IntersectionObserver(entries => {
+            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+        }, { threshold: 0.1 });
+        sections.forEach(s => obs.observe(s));
+
+        function reopenCookieBanner() {
+            localStorage.removeItem('ejce_cookie_consent');
+            location.reload();
+        }
+    </script>
+    <script src="/js/cookies.js"></script>
+</body>
+
+</html>

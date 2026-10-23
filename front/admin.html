@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administration | EJCE</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/licencie.css">
+    <link rel="stylesheet" href="/css/admin.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+
+<body style="background: #f7f9fc;">
+
+    <header>
+        <div class="container nav">
+            <a href="/"><img src="https://maquette-web-ejce.netlify.app/images.png" class="logo"
+                    style="height: 70px;"></a>
+            <div class="hamburger">
+                <span></span><span></span><span></span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href='/'>Accueil</a></li>
+                    <li><a href='/#judo'>Le Judo</a></li>
+                    <li><a href='/newsletter.html'>Newsletter</a></li>
+                    <li><a href='/pedagogique.html'>Équipe pédagogique</a></li>
+                    <li><a href='/contact.html'>Contact</a></li>
+                    <li><a href="/adhesion.html">adhérer au club</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+
+    <main class="container">
+        <h1 class="page-title">Administration du club</h1>
+
+        <div class="admin-grid">
+            <section class="members-list">
+                <div class="admin-header">
+                    <h3>Utilisateurs actifs</h3>
+                    <button class="btn-add-main" onclick="openUserModal()">+ Nouvel Adhérent</button>
+                </div>
+                <div id="usersList">Chargement...</div>
+            </section>
+
+            <section class="members-list"
+                style="display:flex; flex-direction:column; gap:20px; padding:40px; justify-content:center; align-items:center;">
+                <h3>Gestion Rapide</h3>
+                <div style="display:flex; flex-direction:column; gap:15px; width:100%; margin-top:10px;">
+                    <a href="/calendrier" class="action-btn"
+                        style="background:#1a237e; color:white; padding:15px; border-radius:8px; text-decoration:none; text-align:center; font-weight:600;">Gérer
+                        le calendrier</a>
+                    <a href="/revisions" class="action-btn"
+                        style="background:#444; color:white; padding:15px; border-radius:8px; text-decoration:none; text-align:center; font-weight:600;">Voir
+                        les techniques</a>
+                    <a href="/ajouter-technique" class="action-btn"
+                        style="background:#c62828; color:white; padding:15px; border-radius:8px; text-decoration:none; text-align:center; font-weight:600;">Ajouter
+                        une technique</a>
+                    <button onclick="openMyProfileModal()" class="action-btn"
+                        style="background:#27ae60; color:white; padding:15px; border-radius:8px; border:none; text-align:center; font-weight:600; cursor:pointer;">Paramètres
+                        du compte</button>
+                </div>
+            </section>
+
+            <section class="members-list" style="padding:30px;">
+                <h3>Photos du Carousel (Hero)</h3>
+                <p style="font-size:0.85rem; color:#666; margin-bottom:15px;">Max 5 photos. La plus ancienne est
+                    supprimée à chaque nouvel ajout.</p>
+                <div id="dropZoneCarousel" class="drag-zone"
+                    style="height:120px; border: 2px dashed #ccc; border-radius:10px; display:flex; align-items:center; justify-content:center; cursor:pointer; margin-bottom:20px; transition:0.3s;">
+                    <p style="color:#888;">Cliquez ou glissez une photo ici (5 images max)</p>
+                    <input type="file" id="carouselFile" hidden accept="image/*">
+                </div>
+                <div id="carouselList"
+                    style="display:grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap:10px;">
+                    <!-- Images chargées ici -->
+                </div>
+            </section>
+
+            <section class="members-list" style="padding:30px;">
+                <h3>Réglages du Site</h3>
+                <div
+                    style="margin-top:20px; padding:20px; background:#f0f7ff; border-radius:12px; border:1px solid #d0e3ff;">
+                    <label style="display:flex; align-items:center; gap:12px; cursor:pointer;">
+                        <input type="checkbox" id="newsletterToggle"
+                            style="width:22px; height:22px; accent-color: #c62828;">
+                        <span style="font-weight:600; color:#333; font-size:1rem;">Activer la page Newsletter</span>
+                    </label>
+                    <p style="font-size:0.85rem; color:#666; margin-top:10px; line-height:1.4;">Désactiver cette option
+                        masquera immédiatement tous les accès à la newsletter sur le site.</p>
+                </div>
+
+                <div style="margin-top:20px; padding:20px; background:#fff; border-radius:12px; border:1px solid #ddd;">
+                    <label style="display:block; font-weight:600; color:#333; margin-bottom:10px;">Email de réception
+                        des notifications</label>
+                    <input type="email" id="contactEmailInput" placeholder="admin@votre-club.fr"
+                        style="width:100%; padding:10px; border:1px solid #ccc; border-radius:8px; margin-bottom:10px;">
+                    <button id="saveEmailBtn" class="btn-add-main"
+                        style="width:100%; font-size:0.85rem; padding:10px;">Enregistrer l'email</button>
+                    <p style="font-size:0.75rem; color:#888; margin-top:10px;">C'est l'adresse qui recevra les messages
+                        de contact, les inscriptions, etc.</p>
+                </div>
+                <!-- PDF d'inscription -->
+                <div
+                    style="margin-top:20px; padding:20px; background:#fff8f0; border-radius:12px; border:1px solid #ffe0b2;">
+                    <label style="display:block; font-weight:600; color:#333; margin-bottom:6px;">
+                        📄 Dossier d'inscription (PDF)
+                    </label>
+                    <p id="currentPdfInfo" style="font-size:0.82rem; color:#888; margin-bottom:12px;">Chargement...</p>
+
+                    <div id="pdfDropZone"
+                        style="border: 2px dashed #ffb74d; border-radius:10px; padding:24px; text-align:center; cursor:pointer; transition:0.3s; background:#fff;"
+                        onclick="document.getElementById('pdfFileInput').click()"
+                        ondragover="event.preventDefault(); this.style.background='#fff3e0';"
+                        ondragleave="this.style.background='#fff';" ondrop="handlePdfDrop(event)">
+                        <p style="color:#e65100; font-weight:600; margin-bottom:4px;">📁 Cliquez ou glissez le PDF ici
+                        </p>
+                        <p style="font-size:0.8rem; color:#999;">Format PDF uniquement · Max 10 Mo</p>
+                        <input type="file" id="pdfFileInput" accept=".pdf" hidden
+                            onchange="handlePdfFile(this.files[0])">
+                    </div>
+
+                    <div id="pdfUploadStatus" style="margin-top:12px; font-size:0.88rem; font-weight:600;"></div>
+                </div>
+
+                <div style="margin-top:25px;">
+                    <a href="/moderation-newsletter.html" class="action-btn"
+                        style="display:block; background:#2c3e50; color:white; padding:18px; border-radius:10px; text-decoration:none; text-align:center; font-weight:600; transition: 0.3s; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+                        ⚙️ ESPACE MODÉRATION NEWSLETTER
+                    </a>
+                </div>
+            </section>
+        </div>
+
+        <!-- MESSAGERIE ADMIN -->
+        <section class="messages-container"
+            style="background:white; padding:30px; border-radius:15px; box-shadow:0 10px 40px rgba(0,0,0,0.05); margin-top:30px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+                <h3 style="margin:0;">Messagerie Adhérents</h3>
+                <button class="btn-add-main" id="broadcastModeBtn"
+                    style="background:#1a237e; font-size: 0.85rem; padding: 10px 20px;">📢 Message Collectif</button>
+            </div>
+            <div style="display: flex; gap: 30px; height: 500px;">
+                <!-- Liste des contacts -->
+                <div
+                    style="width: 250px; display: flex; flex-direction: column; border-right: 1px solid #eee; padding-right: 15px;">
+                    <input type="text" id="searchAdherentMsg" placeholder="Rechercher un adhérent..."
+                        style="width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box; font-family: 'Poppins', sans-serif;"
+                        oninput="filterAdherentsMsg()">
+                    <div id="conversationsList" style="flex: 1; overflow-y: auto;">
+                        <p style="color:#999; font-size:0.9rem;">Chargement des adhérents...</p>
+                    </div>
+                </div>
+
+                <!-- Zone de chat -->
+                <div style="flex: 1; display: flex; flex-direction: column;">
+                    <div id="adminChatBox" class="chat-box"
+                        style="flex: 1; border: 1px solid #f9f9f9; border-radius: 8px; padding: 20px; background: #fafafa; overflow-y: auto;">
+                        <div style="height:100%; display:flex; align-items:center; justify-content:center; color:#999;">
+                            Sélectionnez un adhérent pour discuter
+                        </div>
+                    </div>
+                    <div id="adminInputZone" class="chat-input" style="display: none; padding-top: 15px;">
+                        <input type="text" id="adminMsgInput" placeholder="Écrire une réponse..."
+                            style="flex:1; padding:12px; border:1px solid #ddd; border-radius:8px;">
+                        <button onclick="sendAdminMessage()"
+                            style="background:#c62828; color:white; border:none; padding:0 25px; border-radius:8px; font-weight:600; cursor:pointer;">Répondre</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- MODAL UTILISATEUR -->
+    <div class="modal" id="userModal">
+        <div class="modal-content" style="width: 500px;">
+            <h3>Gérer un compte</h3>
+            <form id="userForm">
+                <div id="dropZoneUser" class="drag-zone">
+                    <p>Glissez la photo ici ou cliquez</p>
+                    <input type="file" id="formFile" hidden accept="image/*">
+                    <img id="previewUser" class="photo-preview">
+                </div>
+
+                <div class="form-grid">
+                    <div class="form-group"><label>Nom</label><input type="text" id="formNom" required></div>
+                    <div class="form-group"><label>Prénom</label><input type="text" id="formPrenom" required></div>
+                    <div class="form-group"><label>Email</label><input type="email" id="formEmail" required></div>
+                    <div class="form-group"><label>Téléphone</label><input type="tel" id="formPhone"></div>
+                    <div class="form-group"><label>Mot de passe</label><input type="password" id="formPass"
+                            placeholder="Laisser vide pour ne pas modifier"></div>
+
+                    <div class="form-group">
+                        <label>Rôle</label>
+                        <select id="formRole" onchange="toggleUserFields()">
+                            <option value="2">Élève</option>
+                            <option value="3">Prof/Admin</option>
+                        </select>
+                    </div>
+
+                    <!-- Champs spécifiques au Judo (Élèves et Profs) -->
+                    <div id="judoFields" style="display: contents;">
+                        <div class="form-group" id="groupDOB"><label>Naissance</label><input type="date" id="formDOB">
+                        </div>
+                        <div class="form-group" id="groupLicence"><label>Licence</label><input type="text"
+                                id="formLicence"></div>
+                        <div class="form-group"><label>Ceinture</label><select id="formBelt"
+                                onchange="toggleDanField()"></select></div>
+                        <div class="form-group"><label>Date obtention ceinture</label><input type="date"
+                                id="formBeltDate"></div>
+                        <div class="form-group" id="danGroup" style="display:none;"><label>Dan</label><input
+                                type="number" id="formDan"></div>
+                    </div>
+                </div>
+                <input type="hidden" id="uploadedUrl">
+                <div class="modal-actions">
+                    <button type="button" onclick="closeUserModal()">Annuler</button>
+                    <button type="submit" class="btn-add-main">Enregistrer</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL MON PROFIL (ADMIN) -->
+    <div class="modal" id="myProfileModal">
+        <div class="modal-content" style="width: 500px;">
+            <h3>Mes paramètres personnels</h3>
+            <form id="myProfileForm">
+                <div id="dropZoneMyProfile" class="drag-zone"
+                    style="border: 2px dashed #ccc; padding: 20px; text-align: center; border-radius: 10px; cursor: pointer; margin-bottom: 20px;">
+                    <p>Changer ma photo de profil</p>
+                    <input type="file" id="myProfileFile" hidden accept="image/*">
+                    <img id="previewMyProfile" class="photo-preview"
+                        style="max-height:100px; border-radius:50%; display:none; margin:10px auto;">
+                </div>
+
+                <div class="form-grid">
+                    <div class="form-group"><label>Nom</label><input type="text" id="myNom" required></div>
+                    <div class="form-group"><label>Prénom</label><input type="text" id="myPrenom" required></div>
+                    <div class="form-group"><label>Email</label><input type="email" id="myEmail" required></div>
+                    <div class="form-group"><label>Téléphone</label><input type="tel" id="myPhone"></div>
+                    <div class="form-group" style="grid-column: span 2;"><label>Adresse Postale</label><input
+                            type="text" id="myAddress"></div>
+
+                    <div class="form-group" style="grid-column: span 2;">
+                        <hr>
+                    </div>
+                    <div class="form-group"><label>Ancien mot de passe</label><input type="password" id="myOldPass">
+                    </div>
+                    <div class="form-group"><label>Nouveau mot de passe</label><input type="password" id="myNewPass">
+                    </div>
+                </div>
+
+                <div class="modal-actions">
+                    <button type="button" onclick="closeMyProfileModal()">Annuler</button>
+                    <button type="submit" class="btn-add-main">Enregistrer les modifications</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        let uploadedImageUrl = null;
+        let activeStudentId = null;
+        let myData = null;
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            const res = await fetch('/api/user');
+            if (!res.ok) { window.location.href = '/connexion'; return; }
+            myData = await res.json();
+            if (myData.role_id != 3) { alert("Accès réservé aux administrateurs."); window.location.href = '/'; return; }
+
+            loadUsers();
+            loadBelts();
+            loadAdminConversations();
+            loadCarousel();
+            loadSettings();
+            setupDragAndDrop('dropZoneUser', 'formFile', 'previewUser', (url) => { uploadedImageUrl = url; });
+            document.getElementById('broadcastModeBtn').addEventListener('click', openBroadcastMode);
+            setupDragAndDrop('dropZoneMyProfile', 'myProfileFile', 'previewMyProfile', (url) => { myUploadedUrl = url; });
+            setupCarouselUpload();
+            setInterval(autoRefreshAdmin, 5000);
+        });
+        function openMyProfileModal() {
+            if (!myData) return;
+            document.getElementById('myNom').value = myData.nom || '';
+            document.getElementById('myPrenom').value = myData.prenom || '';
+            document.getElementById('myEmail').value = myData.email || '';
+            document.getElementById('myPhone').value = myData.telephone || '';
+            document.getElementById('myAddress').value = myData.adresse_postale || '';
+            const preview = document.getElementById('previewMyProfile');
+            if (myData.imageUrl || myData.profile_picture_url) {
+                preview.src = myData.imageUrl || myData.profile_picture_url;
+                preview.style.display = 'block';
+            }
+            document.getElementById('myProfileModal').style.display = 'flex';
+        }
+
+        function closeMyProfileModal() { document.getElementById('myProfileModal').style.display = 'none'; }
+
+        let myUploadedUrl = null;
+        document.getElementById('myProfileForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const data = {
+                user_id: myData.id,
+                nom: document.getElementById('myNom').value,
+                prenom: document.getElementById('myPrenom').value,
+                email: document.getElementById('myEmail').value,
+                telephone: document.getElementById('myPhone').value,
+                adresse_postale: document.getElementById('myAddress').value,
+                role_id: myData.role_id,
+                imageUrl: myUploadedUrl || myData.imageUrl || myData.profile_picture_url,
+                prof_belt_id: myData.prof_ceinture_id || '',
+                prof_belt_date: myData.prof_date_ceinture || '',
+                prof_dan: myData.prof_dan || ''
+            };
+
+            if (document.getElementById('myNewPass').value) {
+                data.old_password = document.getElementById('myOldPass').value;
+                data.password = document.getElementById('myNewPass').value;
+            }
+
+            const res = await fetch('/api/user/update', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            });
+
+            if (res.ok) {
+                alert("Profil mis à jour !");
+                location.reload();
+            } else {
+                const err = await res.json();
+                alert("Erreur: " + (err.error || "Problème de mise à jour"));
+            }
+        });
+
+        async function loadSettings() {
+            const res = await fetch('/api/settings');
+            const settings = await res.json();
+
+            // Newsletter toggle
+            const toggle = document.getElementById('newsletterToggle');
+            toggle.checked = settings.newsletter_enabled !== '0';
+            toggle.onchange = async () => {
+                await fetch('/api/admin/settings', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ newsletter_enabled: toggle.checked ? '1' : '0' })
+                });
+            };
+
+            // Contact Email
+            const emailInput = document.getElementById('contactEmailInput');
+            emailInput.value = settings.contact_email || '';
+            document.getElementById('saveEmailBtn').onclick = async () => {
+                const resSave = await fetch('/api/admin/settings', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ contact_email: emailInput.value })
+                });
+                if (resSave.ok) alert("Email de contact enregistré !");
+                else alert("Erreur lors de l'enregistrement.");
+            };
+        }
+
+        async function loadCarousel() {
+            const res = await fetch('/api/carousel');
+            const images = await res.json();
+            const list = document.getElementById('carouselList');
+            list.innerHTML = images.map(img => `
+                <div style="position:relative; aspect-ratio:1; border-radius:8px; overflow:hidden; border:1px solid #eee;">
+                    <img src="${img.urlStockage}" style="width:100%; height:100%; object-fit:cover;">
+                    <button onclick="deleteCarouselItem(${img.id})" style="position:absolute; top:5px; right:5px; background:rgba(255,0,0,0.7); color:white; border:none; border-radius:50%; width:20px; height:20px; cursor:pointer; font-size:10px; display:flex; align-items:center; justify-content:center;">×</button>
+                </div>
+            `).join('');
+        }
+
+        function setupCarouselUpload() {
+            const zone = document.getElementById('dropZoneCarousel');
+            const input = document.getElementById('carouselFile');
+            zone.onclick = () => input.click();
+            input.onchange = async (e) => {
+                if (!e.target.files.length) return;
+                const formData = new FormData();
+                formData.append('file', e.target.files[0]);
+                const res = await fetch('/api/carousel', { method: 'POST', body: formData });
+                if (res.ok) loadCarousel();
+            };
+        }
+
+        async function deleteCarouselItem(id) {
+            if (confirm("Supprimer cette image ?")) {
+                await fetch(`/api/carousel?id=${id}`, { method: 'DELETE' });
+                loadCarousel();
+            }
+        }
+
+        function autoRefreshAdmin() {
+            loadAdminConversations();
+            if (activeStudentId) loadConversation(activeStudentId);
+        }
+
+        let allAdminConversations = [];
+
+        async function loadAdminConversations() {
+            const res = await fetch('/api/messages');
+            const data = await res.json();
+            if (!Array.isArray(data)) return;
+            allAdminConversations = data;
+            renderAdminConversations();
+        }
+
+        function filterAdherentsMsg() {
+            renderAdminConversations();
+        }
+
+        function renderAdminConversations() {
+            const query = (document.getElementById('searchAdherentMsg')?.value || '').toLowerCase();
+            const list = document.getElementById('conversationsList');
+
+            const filtered = allAdminConversations.filter(c => {
+                const fullName = `${c.prenom} ${c.nom}`.toLowerCase();
+                return fullName.includes(query);
+            });
+
+            if (filtered.length === 0) { list.innerHTML = "<p style='color:#999'>Aucun adhérent trouvé.</p>"; return; }
+
+            list.innerHTML = filtered.map(c => `
+                <div onclick="openConversation(${c.id}, '${c.prenom} ${c.nom}')" 
+                     style="padding:15px; border-radius:8px; background:${activeStudentId == c.id ? '#f0f0f0' : 'white'}; cursor:pointer; margin-bottom:10px; border:1px solid #eee;">
+                    <div style="font-weight:600; font-size:0.9rem;">${c.prenom} ${c.nom}</div>
+                    <div style="font-size:0.75rem; color:#888;">${c.last_msg ? 'Dernier msg: ' + new Date(c.last_msg).toLocaleDateString('fr-FR') : 'Aucun message'}</div>
+                </div>
+            `).join('');
+        }
+
+        async function openConversation(id, name) {
+            activeStudentId = id;
+            document.getElementById('adminInputZone').style.display = 'flex';
+            loadAdminConversations();
+            loadConversation(id);
+        }
+
+        async function loadConversation(id) {
+            const res = await fetch(`/api/messages?student_id=${id}`);
+            const msgs = await res.json();
+            const box = document.getElementById('adminChatBox');
+            box.innerHTML = msgs.map(m => `
+                <div class="msg ${m.sender_role == 3 ? 'teacher' : 'user'}" 
+                     style="background: ${m.sender_role == 3 ? '#eee' : '#c62828'}; color: ${m.sender_role == 3 ? '#333' : 'white'}; 
+                            margin-bottom:10px; padding:10px 15px; border-radius:12px; align-self: ${m.sender_role == 3 ? 'flex-start' : 'flex-end'}; max-width:80%;">
+                    <p style="margin:0">${m.content}</p>
+                </div>
+            `).join('');
+            box.scrollTop = box.scrollHeight;
+        }
+
+        function openBroadcastMode() {
+            activeStudentId = 'all';
+            document.getElementById('adminInputZone').style.display = 'flex';
+            document.getElementById('adminChatBox').innerHTML = `
+                <div style="height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; color:#c62828; text-align:center; padding:20px;">
+                    <span style="font-size:3rem; margin-bottom:10px;">📢</span>
+                    <strong style="font-size:1.2rem;">Nouveau Message Collectif</strong>
+                    <p style="font-size:0.9rem; color:#666; margin-top:10px;">Ce message sera envoyé individuellement à <strong>tous</strong> les licenciés du club.</p>
+                </div>
+            `;
+            loadAdminConversations();
+        }
+
+        async function sendAdminMessage() {
+            const input = document.getElementById('adminMsgInput');
+            if (!input.value.trim() || !activeStudentId) return;
+
+            const payload = { content: input.value };
+            if (activeStudentId === 'all') {
+                payload.is_broadcast = true;
+            } else {
+                payload.receiver_id = activeStudentId;
+            }
+
+            const res = await fetch('/api/messages', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+
+            if (res.ok) {
+                input.value = "";
+                if (activeStudentId === 'all') {
+                    alert("Message collectif envoyé avec succès !");
+                    activeStudentId = null;
+                    document.getElementById('adminInputZone').style.display = 'none';
+                    document.getElementById('adminChatBox').innerHTML = '<div style="height:100%; display:flex; align-items:center; justify-content:center; color:#999;">Sélectionnez un adhérent pour discuter</div>';
+                } else {
+                    loadConversation(activeStudentId);
+                }
+            }
+        }
+
+        function setupDragAndDrop(zoneId, fileId, previewId, callback) {
+            const zone = document.getElementById(zoneId);
+            const fileInput = document.getElementById(fileId);
+            const preview = document.getElementById(previewId);
+            zone.onclick = () => fileInput.click();
+            fileInput.onchange = (e) => handleFiles(e.target.files);
+            async function handleFiles(files) {
+                if (!files.length) return;
+                const formData = new FormData();
+                formData.append('file', files[0]);
+                const res = await fetch('/api/upload', { method: 'POST', body: formData });
+                const data = await res.json();
+                if (data.url) {
+                    preview.src = data.url;
+                    preview.style.display = 'inline-block';
+                    callback(data.url);
+                }
+            }
+        }
+
+        async function loadBelts() {
+            const res = await fetch('/api/belts');
+            const belts = await res.json();
+            document.getElementById('formBelt').innerHTML = belts.map(b => `<option value="${b.id}">${b.couleur}</option>`).join('');
+        }
+
+        async function loadUsers() {
+            const listDiv = document.getElementById('usersList');
+            const res = await fetch('/api/admin/users');
+            const users = await res.json();
+            listDiv.innerHTML = users.map(u => `
+                <div class="member-item">
+                    <div class="member-photo"><img src="${u.imageUrl || 'https://maquette-web-ejce.netlify.app/dojo1.jpg'}"></div>
+                    <div class="member-name">
+                        <h4>${u.prenom} ${u.nom} ${u.role_id == 3 ? '<span style="color:#c62828; font-size:0.8rem;">(Admin/Prof)</span>' : ''}</h4>
+                        <p>${u.email} ${u.telephone ? ' - ' + u.telephone : ''}</p>
+                    </div>
+                    <div class="member-actions">
+                        <button class="btn-action btn-edit" onclick='openUserModal(${JSON.stringify(u)})'>✏️</button>
+                        <button class="btn-action btn-delete" onclick="deleteUser(${u.id})">🗑️</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function toggleDanField() {
+            const beltSelect = document.getElementById('formBelt');
+            if (beltSelect.selectedIndex >= 0) {
+                const beltName = beltSelect.options[beltSelect.selectedIndex].text.toLowerCase();
+                document.getElementById('danGroup').style.display = beltName.includes('noir') ? 'block' : 'none';
+            }
+        }
+
+        let editingUserId = null;
+        function openUserModal(user = null) {
+            editingUserId = user ? user.id : null;
+            document.getElementById('userModal').style.display = 'flex';
+            if (user) {
+                document.getElementById('formNom').value = user.nom;
+                document.getElementById('formPrenom').value = user.prenom;
+                document.getElementById('formEmail').value = user.email;
+                document.getElementById('formPhone').value = user.telephone || '';
+                document.getElementById('formRole').value = user.role_id;
+
+                if (user.role_id == "2") {
+                    document.getElementById('formDOB').value = user.dateNaissance || '';
+                    document.getElementById('formLicence').value = user.numeroLicence || '';
+                    document.getElementById('formBelt').value = user.ceinture_id || '';
+                    document.getElementById('formBeltDate').value = user.date_ceinture || '';
+                    document.getElementById('formDan').value = user.dan || '';
+                } else if (user.role_id == "3") {
+                    document.getElementById('formDOB').value = '';
+                    document.getElementById('formLicence').value = '';
+                    document.getElementById('formBelt').value = user.prof_ceinture_id || '';
+                    document.getElementById('formBeltDate').value = user.prof_date_ceinture || '';
+                    document.getElementById('formDan').value = user.prof_dan || '';
+                }
+            } else {
+                document.getElementById('formDOB').value = '';
+                document.getElementById('formLicence').value = '';
+                document.getElementById('formBelt').value = '';
+                document.getElementById('formBeltDate').value = '';
+                document.getElementById('formDan').value = '';
+                document.getElementById('formPhone').value = '';
+            }
+            toggleUserFields(); toggleDanField();
+        }
+
+        function closeUserModal() {
+            document.getElementById('userModal').style.display = 'none';
+            document.getElementById('userForm').reset();
+            editingUserId = null;
+        }
+
+        function toggleUserFields() {
+            const role = document.getElementById('formRole').value;
+            if (role == "2") {
+                document.getElementById('groupDOB').style.display = "block";
+                document.getElementById('groupLicence').style.display = "block";
+            } else {
+                document.getElementById('groupDOB').style.display = "none";
+                document.getElementById('groupLicence').style.display = "none";
+            }
+            // La ceinture, sa date et le dan sont visibles pour tout le monde (Élève & Prof)
+        }
+
+        document.getElementById('userForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const data = {
+                user_id: editingUserId,
+                nom: document.getElementById('formNom').value, prenom: document.getElementById('formPrenom').value,
+                email: document.getElementById('formEmail').value, password: document.getElementById('formPass').value,
+                telephone: document.getElementById('formPhone').value,
+                imageUrl: uploadedImageUrl, role_id: document.getElementById('formRole').value,
+                dateNaissance: document.getElementById('formDOB').value, numeroLicence: document.getElementById('formLicence').value,
+            };
+
+            const belt_id = document.getElementById('formBelt').value;
+            const belt_date = document.getElementById('formBeltDate').value;
+            const dan = document.getElementById('formDan').value;
+
+            if (data.role_id == "2") {
+                data.belt_id = belt_id;
+                data.belt_date = belt_date;
+                data.dan = dan;
+            } else {
+                data.prof_belt_id = belt_id;
+                data.prof_belt_date = belt_date;
+                data.prof_dan = dan;
+            }
+
+            const url = editingUserId ? '/api/user/update' : '/api/admin/users';
+            await fetch(url, { method: 'POST', body: JSON.stringify(data), headers: { 'Content-Type': 'application/json' } });
+            closeUserModal(); loadUsers();
+        });
+
+        async function deleteUser(id) { if (confirm("Supprimer ?")) { await fetch(`/api/admin/users?id=${id}`, { method: 'DELETE' }); loadUsers(); } }
+    </script>
+
+    <!-- ── Gestion PDF d'inscription ─────────────────────────────────── -->
+    <script>
+        // Charger l'info du PDF actuel dès le chargement de la page admin
+        async function loadCurrentPdfInfo() {
+            const info = document.getElementById('currentPdfInfo');
+            if (!info) return;
+            try {
+                const res = await fetch('/api/adhesion-pdf');
+                if (res.ok) {
+                    const data = await res.json();
+                    if (data.url) {
+                        const filename = data.url.split('/').pop();
+                        const match = filename.match(/(\d{4})(\d{2})(\d{2})_(\d{2})(\d{2})(\d{2})/);
+                        let dateStr = '';
+                        if (match) {
+                            dateStr = ` — mis à jour le ${match[3]}/${match[2]}/${match[1]} à ${match[4]}h${match[5]}`;
+                        }
+                        info.innerHTML = `✅ PDF actuel : <a href="${data.url}" target="_blank" style="color:#e65100;">voir le fichier</a>${dateStr}`;
+                        return;
+                    }
+                }
+            } catch (e) {}
+            info.innerHTML = '⚠️ Aucun PDF uploadé — le fichier par défaut est utilisé.';
+        }
+
+        async function uploadPdf(file) {
+            const status = document.getElementById('pdfUploadStatus');
+            const dropZone = document.getElementById('pdfDropZone');
+
+            if (!file || file.type !== 'application/pdf') {
+                status.style.color = '#c62828';
+                status.textContent = '❌ Seuls les fichiers PDF sont acceptés.';
+                return;
+            }
+            if (file.size > 10 * 1024 * 1024) {
+                status.style.color = '#c62828';
+                status.textContent = '❌ Fichier trop volumineux (max 10 Mo).';
+                return;
+            }
+
+            status.style.color = '#555';
+            status.textContent = '⏳ Upload en cours...';
+            dropZone.style.opacity = '0.6';
+            dropZone.style.pointerEvents = 'none';
+
+            const formData = new FormData();
+            formData.append('pdf', file);
+
+            try {
+                const res = await fetch('/api/admin/adhesion-pdf', {
+                    method: 'POST',
+                    body: formData
+                });
+                const data = await res.json();
+                if (res.ok && data.success) {
+                    status.style.color = '#2e7d32';
+                    status.innerHTML = `✅ PDF mis à jour avec succès ! <a href="${data.url}" target="_blank" style="color:#c62828;">Voir le fichier</a>`;
+                    loadCurrentPdfInfo();
+                } else {
+                    status.style.color = '#c62828';
+                    status.textContent = '❌ Erreur : ' + (data.error || 'inconnue');
+                }
+            } catch (e) {
+                status.style.color = '#c62828';
+                status.textContent = '❌ Erreur réseau.';
+            } finally {
+                dropZone.style.opacity = '1';
+                dropZone.style.pointerEvents = 'auto';
+            }
+        }
+
+        function handlePdfFile(file) {
+            if (file) uploadPdf(file);
+        }
+
+        function handlePdfDrop(event) {
+            event.preventDefault();
+            document.getElementById('pdfDropZone').style.background = '#fff';
+            const file = event.dataTransfer.files[0];
+            if (file) uploadPdf(file);
+        }
+
+        // Charger l'info PDF dès que la page est prête
+        document.addEventListener('DOMContentLoaded', loadCurrentPdfInfo);
+    </script>
+</body>
+
+</html>

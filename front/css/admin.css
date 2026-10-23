@@ -1,0 +1,309 @@
+/* admin.css */
+
+.admin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.admin-header h2 {
+    color: #c62828;
+    font-size: 2rem;
+}
+
+/* LISTE DES ADHERENTS */
+.members-list {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+}
+
+.member-item {
+    display: grid;
+    grid-template-columns: 80px 1.5fr 1fr 1fr 100px;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid #eee;
+    gap: 20px;
+}
+
+.member-item:last-child {
+    border-bottom: none;
+}
+
+.member-photo img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #c62828;
+}
+
+.member-name h4 {
+    font-size: 1.1rem;
+    color: #333;
+    margin-bottom: 2px;
+}
+
+.member-name p {
+    font-size: 0.9rem;
+    color: #888;
+}
+
+.member-info p {
+    font-size: 0.95rem;
+    color: #444;
+}
+
+.member-category {
+    font-weight: 600;
+    color: #c62828;
+    font-size: 0.9rem;
+    background: #fff5f5;
+    padding: 4px 10px;
+    border-radius: 20px;
+    text-align: center;
+}
+
+.member-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-action {
+    padding: 8px;
+    border-radius: 6px;
+    cursor: pointer;
+    border: none;
+    transition: 0.2s;
+    font-size: 1.1rem;
+}
+
+.btn-edit {
+    background: #eee;
+    color: #555;
+}
+
+.btn-edit:hover {
+    background: #333;
+    color: white;
+}
+
+.btn-delete {
+    background: #fff5f5;
+    color: #c62828;
+}
+
+.btn-delete:hover {
+    background: #c62828;
+    color: white;
+}
+
+/* MODAL / FORM */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 2000;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background: white;
+    padding: 40px;
+    border-radius: 12px;
+    width: 500px;
+    max-width: 90%;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.form-group label {
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.form-group input,
+.form-group select {
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+}
+
+.modal-actions {
+    margin-top: 30px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.btn-add-main {
+    background: #c62828;
+    color: white;
+    padding: 12px 25px;
+    border-radius: 8px;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 900px) {
+    .member-item {
+        grid-template-columns: 80px 1fr 1fr;
+    }
+
+    .member-info,
+    .member-category {
+        display: none;
+    }
+}
+
+/* NOUVEAU LAYOUT ADMIN */
+.admin-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-top: 20px;
+}
+
+@media screen and (max-width: 1200px) {
+    .admin-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.technique-item {
+    display: grid;
+    grid-template-columns: 60px 1.5fr 1fr 80px;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #eee;
+    gap: 15px;
+}
+
+.technique-info h4 {
+    font-size: 1rem;
+    margin-bottom: 2px;
+}
+
+.technique-info p {
+    font-size: 0.85rem;
+    color: #777;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.belt-tag {
+    font-size: 0.8rem;
+    padding: 3px 8px;
+    border-radius: 4px;
+    color: white;
+    text-transform: capitalize;
+    text-align: center;
+    font-weight: 600;
+}
+
+.belt-noir {
+    background: #000;
+}
+
+.belt-blanc {
+    background: #ddd;
+    color: #333;
+}
+
+.belt-jaune {
+    background: #ffd700;
+    color: #333;
+}
+
+.belt-orange {
+    background: #ff8c00;
+}
+
+.belt-verte {
+    background: #228b22;
+}
+
+.belt-bleu {
+    background: #0000ff;
+}
+
+.belt-marron {
+    background: #8b4513;
+}
+
+.belt-noir {
+    background: #000;
+}
+
+.belt-blanc-jaune {
+    background: linear-gradient(90deg, #ddd 50%, #ffd700 50%);
+    color: #333;
+}
+
+.belt-jaune-orange {
+    background: linear-gradient(90deg, #ffd700 50%, #ff8c00 50%);
+    color: #333;
+}
+
+.belt-orange-verte {
+    background: linear-gradient(90deg, #ff8c00 50%, #228b22 50%);
+}
+
+.belt-verte-bleue {
+    background: linear-gradient(90deg, #228b22 50%, #0000ff 50%);
+}
+
+/* DRAG & DROP FOR PHOTOS */
+.drag-zone {
+    border: 2px dashed #ccc;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    color: #888;
+    background: #fafafa;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-bottom: 20px;
+}
+
+.drag-zone.dragover {
+    border-color: #c62828;
+    background: #fff5f5;
+}
+
+.photo-preview {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-top: 10px;
+    display: none;
+    border: 2px solid #c62828;
+}
+
+.form-group label {
+    font-weight: 600;
+    margin-bottom: 5px;
+    display: block;
+}

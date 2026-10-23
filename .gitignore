@@ -1,0 +1,24 @@
+# Environment secrets and local credentials
+**/.env
+**/.env.*
+!**/.env.example
+!**/.env.dist
+
+# Generated PHP dependencies and Symfony cache
+/back/vendor/
+/back/var/
+/back/.phpunit.cache/
+
+# Temporary local test scripts
+/back/tmp_*.php
+
+# Private registration documents
+/front/uploads/docs/
+
+# Local database dump may contain personal messages or member data
+/back/public/db.sql
+
+# Local database files
+*.sqlite
+*.sqlite3
+*.db

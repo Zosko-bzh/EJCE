@@ -1,0 +1,71 @@
+/* adhesion.css */
+.inscription {
+  padding: 60px 20px;
+  background: #f5f5f5;
+  text-align: center;
+}
+
+.inscription .container {
+  max-width: 800px;
+  margin: auto;
+  text-align: center;
+}
+
+.inscription h1 {
+  font-size: 36px;
+  margin-bottom: 20px;
+  color: #c62828;
+}
+
+.inscription h2 {
+  font-size: 24px;
+  margin: 30px 0 15px;
+  color: #c62828;
+}
+
+.inscription p {
+  font-size: 16px;
+  margin-bottom: 15px;
+}
+
+.inscription ul {
+  text-align: left;
+  margin: 0 auto 20px;
+  max-width: 500px;
+  list-style: disc;
+  padding-left: 20px;
+  font-size: 16px;
+}
+
+.inscription a.btn,
+.inscription button.btn {
+  display: inline-block;
+  margin-top: 15px;
+  background: #c62828;
+  color: white;
+  padding: 10px 20px;
+  font-weight: 500;
+  border-radius: 5px;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  transition: 0.3s;
+}
+
+.inscription a.btn:hover,
+.inscription button.btn:hover {
+  background: #b71c1c;
+}
+
+.upload-form {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
+}
+
+.upload-form input[type="file"] {
+  padding: 5px;
+  font-size: 14px;
+}

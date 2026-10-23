@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Équipe pédagogique | EJCE</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        p {
+            text-align: justify;
+        }
+
+        .teacher-quote,
+        .team-hero p,
+        .team-card h3,
+        .team-card .role {
+            text-align: center;
+        }
+
+        nav ul li a,
+        .cta {
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        .logo {
+            height: 80px !important;
+            width: auto;
+        }
+
+        footer a {
+            color: #ffffff !important;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        footer a:hover {
+            color: #c62828 !important;
+        }
+
+        .team-hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://maquette-web-ejce.netlify.app/dojo1.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 80px 20px;
+        }
+
+        .team-hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+            margin-bottom: 80px;
+        }
+
+        .team-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+            text-align: center;
+            padding-bottom: 30px;
+        }
+
+        .team-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .team-img {
+            width: 100%;
+            height: 300px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .team-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .team-card:hover .team-img img {
+            transform: scale(1.1);
+        }
+
+        .team-info {
+            padding: 20px;
+        }
+
+        .team-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .team-card .role {
+            color: #c62828;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+        }
+
+        .teacher-quote {
+            max-width: 800px;
+            margin: 0 auto 50px;
+            text-align: center;
+            font-style: italic;
+            color: #666;
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+    </style>
+</head>
+
+<body style="background: #fdfdfd;">
+    <header>
+        <div class="container nav">
+            <a href="/"><img src="https://maquette-web-ejce.netlify.app/images.png" class="logo"></a>
+            <div class="hamburger">
+                <span></span><span></span><span></span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href='/'>Accueil</a></li>
+                    <li><a href='/#judo'>Le Judo</a></li>
+                    <li><a href='/newsletter.html'>Newsletter</a></li>
+                    <li><a href='/pedagogique.html'>Équipe pédagogique</a></li>
+                    <li><a href='/contact.html'>Contact</a></li>
+                    <li><a href="/adhesion.html">adhérer au club</a></li>
+                </ul>
+            </nav>
+            <a class='cta' href='/connexion'>ESPACE LICENCIÉ</a>
+        </div>
+    </header>
+
+    <section class="team-hero">
+        <div class="container">
+            <h1>Équipe Pédagogique</h1>
+            <p>Les encadrants passionnés de l'Entente Judo Club de l'Est</p>
+        </div>
+    </section>
+
+    <main class="container" style="margin-top: 50px;">
+        <div class="teacher-quote">
+            "Le judo est un art qui nous apprend à utiliser la force de l'adversaire, mais c'est surtout une école de
+            vie où l'on apprend le respect et la maîtrise de soi."
+        </div>
+
+        <div class="team-grid">
+            <!-- PRÉSIDENT -->
+            <div class="team-card">
+                <div class="team-img">
+                    <img src="img/Bernard.jpeg" alt="Bernard Chermain">
+                </div>
+                <div class="team-info">
+                    <h3>Bernard CHERMAIN</h3>
+                    <p class="role">Président</p>
+                </div>
+            </div>
+
+            <!-- PROF PRINCIPAL -->
+            <div class="team-card">
+                <div class="team-img">
+                    <img src="img/Rémy.jpeg" alt="Rémy Rège">
+                </div>
+                <div class="team-info">
+                    <h3>Rémy REGE</h3>
+                    <p class="role">Professeur Principal</p>
+                </div>
+            </div>
+
+            <!-- PROF -->
+            <div class="team-card">
+                <div class="team-img">
+                    <img src="img/Frank.jpeg" alt="Franck REGE">
+                </div>
+                <div class="team-info">
+                    <h3>Franck REGE</h3>
+                    <p class="role">Professeur</p>
+                </div>
+            </div>
+
+            <!-- PROF -->
+            <div class="team-card">
+                <div class="team-img">
+                    <img src="img/Flavien.jpeg" alt="Flavien SELLAMBAYE">
+                </div>
+                <div class="team-info">
+                    <h3>Flavien SELLAMBAYE</h3>
+                    <p class="role">Professeur</p>
+                </div>
+            </div>
+
+            <div class="team-card">
+                <div class="team-img">
+                    <img src="img/Sabine.jpeg" alt="Sabine Rège">
+                </div>
+                <div class="team-info">
+                    <h3>Sabine REGE</h3>
+                    <p class="role">Secrétaire</p>
+                </div>
+            </div>
+
+            <div class="team-card">
+                <div class="team-img">
+                    <img src="img/Yasmine.jpeg" alt="Yasmine Moussajee">
+                </div>
+                <div class="team-info">
+                    <h3>Yasmine MOUSSAJEE</h3>
+                    <p class="role">Trésorière</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container footer-grid">
+            <div>
+                <img src="https://maquette-web-ejce.netlify.app/images.png" class="footer-logo">
+                <p>Adresse<br>La cressonière<br>97440 Saint-André</p>
+                <div class="footer-socials">
+                    <a href="https://www.facebook.com/EntenteJudoClubdelEst/" class="fb-btn" target="_blank"
+                        rel="noopener noreferrer">
+                        <i class="fab fa-facebook-f"></i>
+                        <span>Suivez l'EJCE sur facebook</span>
+                    </a>
+                </div>
+            </div>
+            <div>
+                <h4>Horaires des cours</h4>
+                <p>Lundi : 18h00<br>Vendredi : 19h15</p>
+            </div>
+            <div>
+                <h4>Plan du site</h4>
+                <ul>
+                    <li><a href='/'>Accueil</a></li>
+                    <li><a href='/#judo'>Le Judo</a></li>
+                    <li><a href='/licencie'>Espace licencié</a></li>
+                    <li><a href="/revisions">Page révision</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Notre Partenaire</h4>
+                <div class="footer-partner">
+                    <p style="font-size: 0.85rem; color: #ccc; margin-bottom: 8px;">Partenaire Officiel</p>
+                    <a href="https://www.ffsr.fr/" target="_blank" rel="noopener noreferrer"
+                        title="Fédération Française du Sport Sur Ordonnance / FFSR">
+                        <img src="/img/FFSR.png" alt="Logo FFSR - Partenaire Officiel" class="partner-logo">
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="container" style="margin-top: 30px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 15px;">
+            <div class="copyright">© 2026 EJCE - Tous droits réservés</div>
+            <div style="display:flex; gap: 20px; flex-wrap: wrap;">
+                <a href="/mentions-legales.html" style="font-size:0.82rem; color: #aaa !important;">Mentions légales</a>
+                <a href="/cgu.html" style="font-size:0.82rem; color: #aaa !important;">CGU</a>
+                <a href="/politique-confidentialite.html" style="font-size:0.82rem; color: #aaa !important;">Politique de confidentialité</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/js/script.js"></script>
+    <script src="/js/cookies.js"></script>
+</body>
+
+</html>
